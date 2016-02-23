@@ -1,3 +1,5 @@
+package jft.murinov;
+
 public class JFTMyFirstProgram {
 
    public static void main(String[] args){
