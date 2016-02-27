@@ -3,12 +3,12 @@ package jft.murinov;
 /**
  * Created by Dima on 23.02.2016.
  */
-public class JFTRectangle {
+public class Rectangle {
 
    public double a;
    public double b;
 
-   public JFTRectangle(double a, double b){
+   public Rectangle(double a, double b){
       this.a = a;
       this.b = b;
    }
