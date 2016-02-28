@@ -24,11 +24,11 @@ public class ContactCreationTests {
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    }
-    
-    @Test
-    public void ContactCreationTests() {
         wd.get("http://localhost/addressbook/");
+        login();
+    }
+
+    private void login() {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys("admin");
@@ -36,7 +36,27 @@ public class ContactCreationTests {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.linkText("add new")).click();
+    }
+
+    @Test
+    public void ContactCreationTests() {
+        clickAddNew();
+        fillContactForm();
+        submitContactForm();
+        waitForAutoRedirectToContactsList();
+    }
+
+    private void waitForAutoRedirectToContactsList() {
+        new WebDriverWait(wd, 60, 200).until(
+                ExpectedConditions.elementToBeClickable(By.linkText("nickname@mailserver.ru"))
+        );
+    }
+
+    private void submitContactForm() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillContactForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("FirstName");
@@ -61,12 +81,12 @@ public class ContactCreationTests {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys("nickname@mailserver.ru");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-        new WebDriverWait(wd, 60, 200).until(
-                ExpectedConditions.elementToBeClickable(By.linkText("nickname@mailserver.ru"))
-        );
     }
-    
+
+    private void clickAddNew() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
