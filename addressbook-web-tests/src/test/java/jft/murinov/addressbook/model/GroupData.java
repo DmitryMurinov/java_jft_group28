@@ -1,4 +1,4 @@
-package jft.murinov.addressbook;
+package jft.murinov.addressbook.model;
 
 public class GroupData {
     private final String groupName;
