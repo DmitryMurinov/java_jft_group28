@@ -2,7 +2,9 @@ package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Created by Dima on 28.02.2016.
