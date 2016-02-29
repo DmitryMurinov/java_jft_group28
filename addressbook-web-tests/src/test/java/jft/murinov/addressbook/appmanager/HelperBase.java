@@ -43,9 +43,10 @@ public class HelperBase {
         );
     }
 
-    protected void clickWithOffset(By locator, int xOffset, int yOffset) {
-        WebElement element= wd.findElement(locator);
-        Actions clicker=new Actions(wd);
-        clicker.moveToElement(element, xOffset, yOffset).click().perform();
+    protected void waitToBeVisible(By locator) {
+        new WebDriverWait(wd, 60, 200).until(
+                ExpectedConditions.presenceOfElementLocated(locator)
+        );
     }
+
 }

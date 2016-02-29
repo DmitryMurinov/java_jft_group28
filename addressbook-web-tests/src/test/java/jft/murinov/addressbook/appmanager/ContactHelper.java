@@ -26,16 +26,20 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("nickname"), contactData.getNickname());
         typeInfoBox(By.name("address"), contactData.getFirstAddress());
         typeInfoBox(By.name("home"), contactData.getHomePhoneString());
-        typeInfoBox(By.name("mobile"), contactData.getFirstName());
+        typeInfoBox(By.name("mobile"), contactData.getMobilePhoneString());
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
     }
 
-    public void selectContact() {
-        clickWithOffset(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[2]"), -15, 18);
+    public void selectContact(String id) {
+        click(By.xpath(".//*[@id='" + id + "']"));
     }
 
     public void waitForAutoRedirectToContactsList(String firstEmail) {
         waitToBeClickable(By.linkText(firstEmail));
+    }
+
+    public void waitForAutoRedirectToContactsListAfterDelete(String tableHeaderLocator) {
+        waitToBeVisible(By.cssSelector(tableHeaderLocator));
     }
 
     public void submitContactForm() {
@@ -43,5 +47,8 @@ public class ContactHelper extends HelperBase{
     }
 
     public void deleteSelectedContacts() { click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void acceptAlert() { wd.switchTo().alert().accept();
     }
 }
