@@ -7,10 +7,10 @@ public class ContactModifyTests extends TestBase{
 
     @Test
     public void testContactCreation() {
-        app.getContactHelper().clickAddNewContact();
-        app.getContactHelper().fillContactForm(new ContactData("FirstName", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru"));
-        app.getContactHelper().submitContactForm();
-        app.getContactHelper().waitForAutoRedirectToContactsList("nickname@mailserver.ru");
+        app.getContactHelper().clickModifyContact();
+        app.getContactHelper().fillContactForm(new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru"));
+        app.getContactHelper().submitContactModify();
+        app.getContactHelper().waitForAutoRedirectToContactsList("nicknameModified@mailserver.ru");
     }
 
 }
