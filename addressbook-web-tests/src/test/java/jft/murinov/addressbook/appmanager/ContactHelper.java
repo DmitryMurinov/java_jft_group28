@@ -2,9 +2,7 @@ package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -30,8 +28,8 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
     }
 
-    public void selectContact(String id) {
-        click(By.xpath(".//*[@id='" + id + "']"));
+    public void selectContact(int rowNumber) {
+        click(By.xpath("//tr[" + (1 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
     }
 
     public void waitForAutoRedirectToContactsList(String firstEmail) {
