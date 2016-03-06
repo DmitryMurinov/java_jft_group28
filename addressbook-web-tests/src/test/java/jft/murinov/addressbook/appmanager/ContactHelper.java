@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -21,7 +22,7 @@ public class ContactHelper extends HelperBase{
         click(By.linkText("add new"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         typeInfoBox(By.name("firstname"), contactData.getFirstName());
         typeInfoBox(By.name("middlename"), contactData.getMiddleName());
         typeInfoBox(By.name("lastname"), contactData.getLastName());
@@ -31,8 +32,10 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("mobile"), contactData.getMobilePhoneString());
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
 
-        if(isElementPresent(By.name("new_group"))){
+        if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 
