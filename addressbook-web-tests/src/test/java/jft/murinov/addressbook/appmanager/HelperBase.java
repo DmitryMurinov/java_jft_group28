@@ -25,8 +25,10 @@ public class HelperBase {
 
     protected void typeInfoBox(By locator, String textToEnter) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(textToEnter);
+        if (textToEnter != null) {
+            wd.findElement(locator).clear();
+            wd.findElement(locator).sendKeys(textToEnter);
+        }
     }
 
     public boolean isAlertPresent() {
