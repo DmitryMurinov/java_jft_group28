@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -43,8 +44,8 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//tr[" + (1 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
     }
 
-    public void waitForAutoRedirectToContactsList(String firstEmail) {
-        waitToBeClickable(By.linkText(firstEmail));
+    public void waitForAutoRedirectToContactsList(String id) {
+        waitToBeClickable(By.id(id));
     }
 
     public void waitForAutoRedirectToContactsListAfterDelete(String tableHeaderLocator) {
@@ -66,5 +67,16 @@ public class ContactHelper extends HelperBase{
     }
 
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    }
+
+    public void createContact(ContactData contactData, boolean isCreation) {
+        clickAddNewContact();
+        fillContactForm(contactData, isCreation);
+        submitContactForm();
+        waitForAutoRedirectToContactsList("maintable");
+    }
+
+    public boolean isThereAnyContact() {
+        return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 }
