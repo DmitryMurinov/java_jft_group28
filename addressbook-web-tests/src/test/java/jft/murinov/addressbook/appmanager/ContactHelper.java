@@ -2,8 +2,11 @@ package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -27,6 +30,10 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("home"), contactData.getHomePhoneString());
         typeInfoBox(By.name("mobile"), contactData.getMobilePhoneString());
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
+
+        if(isElementPresent(By.name("new_group"))){
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        }
     }
 
     public void selectContact(int rowNumber) {
