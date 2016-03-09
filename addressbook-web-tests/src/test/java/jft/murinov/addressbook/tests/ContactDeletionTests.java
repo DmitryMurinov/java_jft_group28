@@ -15,6 +15,6 @@ public class ContactDeletionTests extends TestBase{
         app.getContactHelper().selectContact(1); //Don't forget to enter row number
         app.getContactHelper().deleteSelectedContacts();
         app.getContactHelper().acceptAlert();
-        app.getContactHelper().waitForAutoRedirectToContactsListAfterDelete(".fdTableSortTrigger");
+        app.getContactHelper().waitForAutoRedirectToContactsListAfterDelete();
     }
 }

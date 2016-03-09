@@ -44,12 +44,12 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//tr[" + (1 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
     }
 
-    public void waitForAutoRedirectToContactsList(String id) {
-        waitToBeClickable(By.id(id));
+    public void waitForAutoRedirectToContactsList() {
+        waitToBeClickable(By.id("maintable"));
     }
 
-    public void waitForAutoRedirectToContactsListAfterDelete(String tableHeaderLocator) {
-        waitToBeVisible(By.cssSelector(tableHeaderLocator));
+    public void waitForAutoRedirectToContactsListAfterDelete() {
+        waitToBeVisible(By.cssSelector(".fdTableSortTrigger"));
     }
 
     public void submitContactForm() {
@@ -73,7 +73,7 @@ public class ContactHelper extends HelperBase{
         clickAddNewContact();
         fillContactForm(contactData, isCreation);
         submitContactForm();
-        waitForAutoRedirectToContactsList("maintable");
+        waitForAutoRedirectToContactsList();
     }
 
     public boolean isThereAnyContact() {
