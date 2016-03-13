@@ -16,7 +16,7 @@ public class GroupModifyTests extends TestBase{
             app.getGroupHelper().createGroup(new GroupData("test1", null, null));
         }
         int before = app.getGroupHelper().getGroupCount();
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(before - 1);
         app.getGroupHelper().initGroupModify();
         app.getGroupHelper().fillGroupCreationForm(new GroupData("test1", "test2mod", "test3mod"));
         app.getGroupHelper().submitGroupModify();

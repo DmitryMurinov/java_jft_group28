@@ -12,7 +12,7 @@ public class ContactModifyTests extends TestBase {
             app.getContactHelper().createContact(new ContactData("FirstName", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1"), true);
         }
         int before = app.getContactHelper().getContactCount();
-        app.getContactHelper().clickModifyContact();
+        app.getContactHelper().clickModifyContact(before - 1);
         app.getContactHelper().fillContactForm(new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null), false);
         app.getContactHelper().submitContactModify();
         app.getContactHelper().waitForAutoRedirectToContactsList();

@@ -41,7 +41,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact(int rowNumber) {
-        click(By.xpath("//tr[" + (1 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
+        click(By.xpath("//tr[" + (2 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
     }
 
     public void waitForAutoRedirectToContactsList() {
@@ -62,8 +62,8 @@ public class ContactHelper extends HelperBase{
     public void acceptAlert() { wd.switchTo().alert().accept();
     }
 
-    public void clickModifyContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    public void clickModifyContact(int index) {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[" + (2 + index) + "]/td[8]/a/img"));
     }
 
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
