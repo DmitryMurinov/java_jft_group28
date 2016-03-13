@@ -4,6 +4,8 @@ import jft.murinov.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactModifyTests extends TestBase {
 
     @Test
@@ -11,13 +13,13 @@ public class ContactModifyTests extends TestBase {
         if (! app.getContactHelper().isThereAnyContact()){
             app.getContactHelper().createContact(new ContactData("FirstName", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1"), true);
         }
-        int before = app.getContactHelper().getContactCount();
-        app.getContactHelper().clickModifyContact(before - 1);
+        List<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().clickModifyContact(before.size() - 1);
         app.getContactHelper().fillContactForm(new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null), false);
         app.getContactHelper().submitContactModify();
         app.getContactHelper().waitForAutoRedirectToContactsList();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(after, before);
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size());
     }
 
 }

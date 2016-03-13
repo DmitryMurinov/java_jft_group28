@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Dima on 28.02.2016.
  */
@@ -65,5 +68,16 @@ public class GroupHelper extends HelperBase{
 
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for(WebElement element: elements){
+            String name = element.getText();
+            GroupData group = new GroupData(name, null, null);
+            groups.add(group);
+        }
+        return groups;
     }
 }

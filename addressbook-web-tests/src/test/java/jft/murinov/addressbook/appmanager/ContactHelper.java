@@ -1,6 +1,7 @@
 package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
+import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -82,5 +86,20 @@ public class ContactHelper extends HelperBase{
 
     public int getContactCount() {
         return wd.findElements(By.cssSelector(".center>a>img[alt=\"Details\"]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> lastName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
+        List<WebElement> firstName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
+
+
+        for (int i = 0; i < lastName.size(); i++){
+            String lname = lastName.get(i).getText();
+            String fname = firstName.get(i).getText();
+            ContactData contact = new ContactData(fname, null, lname, null, null, null, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
