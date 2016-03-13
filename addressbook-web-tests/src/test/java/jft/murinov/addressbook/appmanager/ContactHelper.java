@@ -97,7 +97,7 @@ public class ContactHelper extends HelperBase{
         for (int i = 0; i < lastName.size(); i++){
             String lname = lastName.get(i).getText();
             String fname = firstName.get(i).getText();
-            ContactData contact = new ContactData(fname, null, lname, null, null, null, null, null, null);
+            ContactData contact = new ContactData(fname, "MiddleName", lname, "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1");
             contacts.add(contact);
         }
         return contacts;
