@@ -22,10 +22,8 @@ public class ContactModifyTests extends TestBase {
         app.getContactHelper().waitForAutoRedirectToContactsList();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
-
         before.remove(before.size() - 1);
         before.add(contact);
-
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 
