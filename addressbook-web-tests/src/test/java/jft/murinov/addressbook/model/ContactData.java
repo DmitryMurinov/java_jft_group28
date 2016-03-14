@@ -1,6 +1,7 @@
 package jft.murinov.addressbook.model;
 
 public class ContactData {
+    private int id;
     private final String firstName;
     private final String middleName;
     private final String lastName;
@@ -11,7 +12,21 @@ public class ContactData {
     private final String firstEmail;
     private String group;
 
+    public ContactData(int id, String firstName, String middleName, String lastName, String nickname, String firstAddress, String homePhoneString, String mobilePhoneString, String firstEmail, String group) {
+        this.id = id;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.nickname = nickname;
+        this.firstAddress = firstAddress;
+        this.homePhoneString = homePhoneString;
+        this.mobilePhoneString = mobilePhoneString;
+        this.firstEmail = firstEmail;
+        this.group = group;
+    }
+
     public ContactData(String firstName, String middleName, String lastName, String nickname, String firstAddress, String homePhoneString, String mobilePhoneString, String firstEmail, String group) {
+        this.id = 0;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -60,6 +75,10 @@ public class ContactData {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNickname() {

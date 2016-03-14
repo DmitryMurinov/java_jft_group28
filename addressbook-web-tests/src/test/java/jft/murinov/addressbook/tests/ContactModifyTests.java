@@ -16,7 +16,7 @@ public class ContactModifyTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().clickModifyContact(before.size() - 1);
-        ContactData contact = new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null);
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null);
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModify();
         app.getContactHelper().waitForAutoRedirectToContactsList();
