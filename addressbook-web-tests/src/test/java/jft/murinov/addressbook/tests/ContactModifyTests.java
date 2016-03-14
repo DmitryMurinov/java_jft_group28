@@ -4,6 +4,7 @@ import jft.murinov.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModifyTests extends TestBase {
@@ -15,11 +16,17 @@ public class ContactModifyTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().clickModifyContact(before.size() - 1);
-        app.getContactHelper().fillContactForm(new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null), false);
+        ContactData contact = new ContactData("FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null);
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModify();
         app.getContactHelper().waitForAutoRedirectToContactsList();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size() - 1);
+        before.add(contact);
+
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 
 }
