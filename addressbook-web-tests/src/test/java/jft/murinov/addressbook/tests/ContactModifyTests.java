@@ -3,6 +3,7 @@ package jft.murinov.addressbook.tests;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -11,11 +12,16 @@ import java.util.List;
 
 public class ContactModifyTests extends TestBase {
 
-    @Test(enabled = false)
-    public void testContactModify() {
+    @BeforeMethod
+    public void insurePreconditions(){
+        app.getNavigationHelper().goToHomePage();
         if (! app.getContactHelper().isThereAnyContact()){
             app.getContactHelper().createContact(new ContactData("FirstName", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1"), true);
         }
+    }
+
+    @Test(enabled = false)
+    public void testContactModify() {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().clickModifyContact(before.size() - 1);
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null);
