@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void testContactCreation() {
         List<ContactData> before = app.getContactHelper().getContactList();
         ContactData contact = new ContactData("FirstName2", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1");
