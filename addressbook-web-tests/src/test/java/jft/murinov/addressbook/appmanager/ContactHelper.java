@@ -112,8 +112,11 @@ public class ContactHelper extends HelperBase{
             int id = Integer.parseInt(idWeb.get(i).findElement(By.tagName("input")).getAttribute("id"));
             String lname = lastName.get(i).getText();
             String fname = firstName.get(i).getText();
-            ContactData contact = new ContactData(id, fname, "MiddleName", lname, "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1");
-            contacts.add(contact);
+            contacts.add(new ContactData()
+                    .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
+                    .withFirstAddress("Address string").withHomePhoneString("+74951234567").withMobilePhoneString("+75551234567")
+                    .withFirstEmail("nickname@mailserver.ru").withGroup("test1")
+            );
         }
         return contacts;
     }
