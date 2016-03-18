@@ -44,6 +44,20 @@ public class ContactHelper extends HelperBase{
         }
     }
 
+    public void modify(int index, ContactData contact) {
+        clickModifyContact(index);
+        fillContactForm(contact, false);
+        submitContactModify();
+        waitForAutoRedirectToContactsList();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContacts();
+        acceptAlert();
+        waitForAutoRedirectToContactsListAfterDelete();
+    }
+
     public void selectContact(int rowNumber) {
         click(By.xpath("//tr[" + (2 + rowNumber) + "]/td[1]/input[@type='checkbox']"));
     }
@@ -73,7 +87,7 @@ public class ContactHelper extends HelperBase{
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
-    public void createContact(ContactData contactData, boolean isCreation) {
+    public void create(ContactData contactData, boolean isCreation) {
         clickAddNewContact();
         fillContactForm(contactData, isCreation);
         submitContactForm();
@@ -88,7 +102,7 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.cssSelector(".center>a>img[alt=\"Details\"]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> idWeb = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(1)"));
         List<WebElement> lastName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
