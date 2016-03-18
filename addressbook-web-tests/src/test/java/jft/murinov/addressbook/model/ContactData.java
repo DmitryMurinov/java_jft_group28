@@ -1,41 +1,65 @@
 package jft.murinov.addressbook.model;
 
 public class ContactData {
-    private int id;
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String nickname;
-    private final String firstAddress;
-    private final String homePhoneString;
-    private final String mobilePhoneString;
-    private final String firstEmail;
+    private int id = 0;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String nickname;
+    private String firstAddress;
+    private String homePhoneString;
+    private String mobilePhoneString;
+    private String firstEmail;
     private String group;
 
-    public ContactData(int id, String firstName, String middleName, String lastName, String nickname, String firstAddress, String homePhoneString, String mobilePhoneString, String firstEmail, String group) {
+    public ContactData withId(int id) {
         this.id = id;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickname = nickname;
-        this.firstAddress = firstAddress;
-        this.homePhoneString = homePhoneString;
-        this.mobilePhoneString = mobilePhoneString;
-        this.firstEmail = firstEmail;
-        this.group = group;
+        return this;
     }
 
-    public ContactData(String firstName, String middleName, String lastName, String nickname, String firstAddress, String homePhoneString, String mobilePhoneString, String firstEmail, String group) {
-        this.id = 0;
+    public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withMiddleName(String middleName) {
         this.middleName = middleName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
         this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withFirstAddress(String firstAddress) {
         this.firstAddress = firstAddress;
+        return this;
+    }
+
+    public ContactData withHomePhoneString(String homePhoneString) {
         this.homePhoneString = homePhoneString;
+        return this;
+    }
+
+    public ContactData withMobilePhoneString(String mobilePhoneString) {
         this.mobilePhoneString = mobilePhoneString;
+        return this;
+    }
+
+    public ContactData withFirstEmail(String firstEmail) {
         this.firstEmail = firstEmail;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
         this.group = group;
+        return this;
     }
 
     public String getFirstName() {
@@ -54,9 +78,7 @@ public class ContactData {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public String getNickname() {
         return nickname;
