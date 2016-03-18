@@ -14,7 +14,10 @@ public class ContactModifyTests extends TestBase {
     public void insurePreconditions(){
         app.goTo().HomePage();
         if (app.contact().list().size() == 0){
-            app.contact().create(new ContactData("FirstName", "MiddleName", "LastName", "Nickname", "Address string", "+74951234567", "+75551234567", "nickname@mailserver.ru", "test1"), true);
+            app.contact().create(new ContactData()
+                            .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
+                            .withHomePhoneString("+74951234567").withMobilePhoneString("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup("test1")
+                    , true);
         }
     }
 
@@ -22,7 +25,10 @@ public class ContactModifyTests extends TestBase {
     public void testContactModify() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(), "FirstNameModified", "MiddleNameModified", "LastNameModified", "NicknameModified", "Address stringModified", "+74957654321", "+75557654321", "nicknameModified@mailserver.ru", null);
+        ContactData contact = new ContactData()
+                .withId(before.get(index).getId()).withFirstName("FirstNameModified").withMiddleName("MiddleNameModified").withLastName("LastNameModified")
+                .withNickname("NicknameModified").withFirstAddress("Address stringModified").withHomePhoneString("+74957654321").withMobilePhoneString("+75557654321")
+                .withFirstEmail("nicknameModified@mailserver.ru");
         app.contact().modify(index, contact);
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
