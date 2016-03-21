@@ -100,7 +100,7 @@ public class ContactHelper extends HelperBase{
         waitForAutoRedirectToContactsList();
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.cssSelector(".center>a>img[alt=\"Details\"]")).size();
     }
 
