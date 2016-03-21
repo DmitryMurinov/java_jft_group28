@@ -1,6 +1,7 @@
 package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
+import jft.murinov.addressbook.model.Contacts;
 import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -100,8 +101,8 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.cssSelector(".center>a>img[alt=\"Details\"]")).size();
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> idWeb = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(1)"));
         List<WebElement> lastName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
         List<WebElement> firstName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)"));
