@@ -51,6 +51,7 @@ public class ContactHelper extends HelperBase{
         clickModifyContactById(contact.getId());
         fillContactForm(contact, false);
         submitContactModify();
+        contactCache = null;
         waitForAutoRedirectToContactsList();
     }
 
@@ -58,6 +59,7 @@ public class ContactHelper extends HelperBase{
         selectContactById(contactToDelete.getId());
         deleteSelectedContacts();
         acceptAlert();
+        contactCache = null;
         waitForAutoRedirectToContactsListAfterDelete();
     }
 
@@ -94,6 +96,7 @@ public class ContactHelper extends HelperBase{
         clickAddNewContact();
         fillContactForm(contactData, isCreation);
         submitContactForm();
+        contactCache = null;
         waitForAutoRedirectToContactsList();
     }
 
@@ -101,8 +104,14 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.cssSelector(".center>a>img[alt=\"Details\"]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if(contactCache != null){
+            return new Contacts(contactCache);
+        }
+
+        contactCache = new Contacts();
         List<WebElement> idWeb = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(1)"));
         List<WebElement> lastName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
         List<WebElement> firstName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)"));
@@ -111,13 +120,13 @@ public class ContactHelper extends HelperBase{
             int id = Integer.parseInt(idWeb.get(i).findElement(By.tagName("input")).getAttribute("id"));
             String lname = lastName.get(i).getText();
             String fname = firstName.get(i).getText();
-            contacts.add(new ContactData()
+            contactCache.add(new ContactData()
                     .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
                     .withFirstAddress("Address string").withHomePhoneString("+74951234567").withMobilePhoneString("+75551234567")
                     .withFirstEmail("nickname@mailserver.ru").withGroup("test1")
             );
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
 
