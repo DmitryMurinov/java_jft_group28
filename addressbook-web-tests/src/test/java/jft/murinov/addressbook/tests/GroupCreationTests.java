@@ -4,9 +4,8 @@ import jft.murinov.addressbook.model.GroupData;
 import jft.murinov.addressbook.model.Groups;
 import org.testng.annotations.Test;
 
-import static com.google.common.base.Predicates.equalTo;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase{
 
