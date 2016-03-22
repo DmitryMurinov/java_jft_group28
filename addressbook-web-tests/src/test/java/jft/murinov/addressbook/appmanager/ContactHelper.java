@@ -85,7 +85,7 @@ public class ContactHelper extends HelperBase{
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
-        
+
 //        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", id)));
     }
 
@@ -112,20 +112,22 @@ public class ContactHelper extends HelperBase{
         }
 
         contactCache = new Contacts();
-        List<WebElement> idWeb = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(1)"));
-        List<WebElement> lastName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)"));
-        List<WebElement> firstName = wd.findElements(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)"));
 
-        for (int i = 0; i < idWeb.size(); i++){
-            int id = Integer.parseInt(idWeb.get(i).findElement(By.tagName("input")).getAttribute("id"));
-            String lname = lastName.get(i).getText();
-            String fname = firstName.get(i).getText();
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+
+        for(WebElement row: rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
+            String lname = cells.get(1).getText();
+            String fname = cells.get(2).getText();
+            String[] phones = cells.get(5).getText().split("\n");
+
             contactCache.add(new ContactData()
                     .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
-                    .withFirstAddress("Address string").withHomePhone("+74951234567").withMobilePhoneString("+75551234567")
-                    .withFirstEmail("nickname@mailserver.ru").withGroup("test1")
-            );
+                    .withFirstAddress("Address string").withHomePhone(phones[0]).withMobilePhoneString(phones[1])
+                    .withWorkPhoneString(phones[2]).withFirstEmail("nickname@mailserver.ru").withGroup("test1"));
         }
+        
         return new Contacts(contactCache);
     }
 
