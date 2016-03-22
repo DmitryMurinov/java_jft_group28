@@ -81,7 +81,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void clickModifyContactById(int id) {
-        click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
+        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", id)));
     }
 
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
