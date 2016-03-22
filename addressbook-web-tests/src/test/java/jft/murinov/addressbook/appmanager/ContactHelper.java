@@ -2,20 +2,13 @@ package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
-import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -38,7 +31,9 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("address"), contactData.getFirstAddress());
         typeInfoBox(By.name("home"), contactData.getHomePhoneString());
         typeInfoBox(By.name("mobile"), contactData.getMobilePhoneString());
+        typeInfoBox(By.name("work"), contactData.getMobilePhoneString());
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
+
 
         if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -122,7 +117,7 @@ public class ContactHelper extends HelperBase{
             String fname = firstName.get(i).getText();
             contactCache.add(new ContactData()
                     .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
-                    .withFirstAddress("Address string").withHomePhoneString("+74951234567").withMobilePhoneString("+75551234567")
+                    .withFirstAddress("Address string").withHomePhone("+74951234567").withMobilePhoneString("+75551234567")
                     .withFirstEmail("nickname@mailserver.ru").withGroup("test1")
             );
         }
@@ -130,4 +125,15 @@ public class ContactHelper extends HelperBase{
     }
 
 
+    public ContactData infoFromEditForm(ContactData contact) {
+        clickModifyContactById(contact.getId());
+        String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
+                .withHomePhone(home).withMobilePhoneString(mobile).withWorkPhoneString(work);
+    }
 }
