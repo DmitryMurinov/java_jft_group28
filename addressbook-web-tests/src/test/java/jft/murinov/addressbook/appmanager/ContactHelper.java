@@ -29,11 +29,12 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("lastname"), contactData.getLastName());
         typeInfoBox(By.name("nickname"), contactData.getNickname());
         typeInfoBox(By.name("address"), contactData.getFirstAddress());
-        typeInfoBox(By.name("home"), contactData.getHomePhoneString());
-        typeInfoBox(By.name("mobile"), contactData.getMobilePhoneString());
-        typeInfoBox(By.name("work"), contactData.getMobilePhoneString());
+        typeInfoBox(By.name("home"), contactData.getHomePhone());
+        typeInfoBox(By.name("mobile"), contactData.getMobilePhone());
+        typeInfoBox(By.name("work"), contactData.getMobilePhone());
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
-
+        typeInfoBox(By.name("email2"), contactData.getSecondEmail());
+        typeInfoBox(By.name("email3"), contactData.getThirdEmail());
 
         if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -120,14 +121,15 @@ public class ContactHelper extends HelperBase{
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
             String lname = cells.get(1).getText();
             String fname = cells.get(2).getText();
-            String[] phones = cells.get(5).getText().split("\n");
+            String address = cells.get(3).getText();
+            String allEmails = cells.get(4).getText();
+            String allPhones = cells.get(5).getText();
 
             contactCache.add(new ContactData()
                     .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
-                    .withFirstAddress("Address string").withHomePhone(phones[0]).withMobilePhoneString(phones[1])
-                    .withWorkPhoneString(phones[2]).withFirstEmail("nickname@mailserver.ru").withGroup("test1"));
+                    .withFirstAddress(address).withAllPhones(allPhones).withFirstEmail("nickname@mailserver.ru").withAllEmail(allEmails).withGroup("test1"));
         }
-        
+
         return new Contacts(contactCache);
     }
 
@@ -136,11 +138,17 @@ public class ContactHelper extends HelperBase{
         clickModifyContactById(contact.getId());
         String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String firstAddress = wd.findElement(By.name("address")).getText();
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
-                .withHomePhone(home).withMobilePhoneString(mobile).withWorkPhoneString(work);
+                .withFirstAddress(firstAddress).withHomePhone(home).withMobilePhoneString(mobile).withWorkPhoneString(work)
+                .withFirstEmail(email).withSecondEmail(email2).withThirdEmail(email3);
     }
 }

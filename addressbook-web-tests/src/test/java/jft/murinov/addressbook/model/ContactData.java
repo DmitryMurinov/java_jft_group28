@@ -11,7 +11,11 @@ public class ContactData {
     private String mobilePhoneString;
     private String workPhoneString;
     private String firstEmail;
+    private String secondEmail;
+    private String thirdEmail;
     private String group;
+    private String allPhones;
+    private String allEmails;
 
     public ContactData withId(int id) {
         this.id = id;
@@ -53,13 +57,33 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withWorkPhoneString(String mobilePhoneString) {
-        this.mobilePhoneString = mobilePhoneString;
+    public ContactData withWorkPhoneString(String workPhoneString) {
+        this.workPhoneString = workPhoneString;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
     public ContactData withFirstEmail(String firstEmail) {
         this.firstEmail = firstEmail;
+        return this;
+    }
+
+    public ContactData withSecondEmail(String secondEmail) {
+        this.secondEmail = secondEmail;
+        return this;
+    }
+
+    public ContactData withThirdEmail(String thirdEmail) {
+        this.thirdEmail = thirdEmail;
+        return this;
+    }
+
+    public ContactData withAllEmail(String allEmails) {
+        this.allEmails = allEmails;
         return this;
     }
 
@@ -94,6 +118,42 @@ public class ContactData {
         return firstAddress;
     }
 
+    public String getSecondEmail() {
+        return secondEmail;
+    }
+
+    public String getThirdEmail() {
+        return thirdEmail;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public String getHomePhone() {
+        return homePhoneString;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhoneString;
+    }
+
+    public String getWorkPhone() {
+        return workPhoneString;
+    }
+
+    public String getFirstEmail() {
+        return firstEmail;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
     public String getHomePhoneString() {
         return homePhoneString;
     }
@@ -104,14 +164,6 @@ public class ContactData {
 
     public String getWorkPhoneString() {
         return workPhoneString;
-    }
-
-    public String getFirstEmail() {
-        return firstEmail;
-    }
-
-    public String getGroup() {
-        return group;
     }
 
     @Override
