@@ -42,26 +42,32 @@ public class ContactInfoTests extends TestBase{
 
         WebElement contactInfo = app.contact().infoFromInfoForm(contact);
 
-        System.out.println();
+        String contactI = cleaned(contactInfo);
 
-        String FIO = contactInfo.findElement(By.tagName("b")).getText();
+        String contactFromEdit = mergeContactInfo(contactInfoFromEditForm);
 
-        assertThat(FIO, equalTo(mergeFIO(contactInfoFromEditForm)));
-
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getNickname()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getFirstAddress()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getHomePhone()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getMobilePhone()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getWorkPhone()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getFirstEmail()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getSecondEmail()));
-        assertThat(contactInfo.getText(), containsString(contactInfoFromEditForm.getThirdEmail()));
+        assertThat(contactI, equalTo(contactFromEdit));
     }
 
-    private String mergeFIO(ContactData contact) {
-        return Arrays.asList(contact.getFirstName(), contact.getMiddleName(), contact.getLastName())
+    private String mergeContactInfo(ContactData contact) {
+        return Arrays.asList(contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNickname()
+                        , contact.getFirstAddress(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()
+                        , contact.getFirstEmail(), contact.getSecondEmail(), contact.getThirdEmail())
                 .stream().filter(s -> ! s.equals(""))
-                .collect(Collectors.joining(" "));
+                .map(ContactInfoTests::cleaned)
+                .collect(Collectors.joining(""));
     }
+
+    private String cleaned(WebElement contactInfo){
+        String contact = contactInfo.getText().replace("www.mailserver.ru", "").replace("()", "").replace("H:", "").replace("M:", "").replace("W:", "")
+                .replaceAll("Member of.*", "").replace("\n", "").replace(" ", "");
+        return contact;
+    }
+
+    public static String cleaned(String phone){
+        return  phone.replaceAll(" ", "");
+    }
+
+
     
 }
