@@ -21,7 +21,7 @@ public class ContactPhoneTests extends TestBase{
         if (app.contact().all().size() == 0){
             app.contact().create(new ContactData()
                             .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
-                            .withHomePhone("+74951234567").withMobilePhoneString("+75551234567").withWorkPhoneString("22-55").withFirstEmail("nickname@mailserver.ru")
+                            .withHomePhone("+74951234567").withMobilePhone("+75551234567").withWorkPhone("22-55").withFirstEmail("nickname@mailserver.ru")
                             .withSecondEmail("nickname2@mailserver.ru").withThirdEmail("nickname2@mailserver.ru").withGroup("test1")
                     , true);
         }
@@ -56,5 +56,5 @@ public class ContactPhoneTests extends TestBase{
     public static String cleaned(String phone){
         return  phone.replaceAll("\\s", "").replaceAll("[-()]]", "");
     }
-    
+
 }

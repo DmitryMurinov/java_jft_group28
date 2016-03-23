@@ -90,6 +90,10 @@ public class ContactHelper extends HelperBase{
 //        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", id)));
     }
 
+    public void clickInfoContactById(int id) {
+        click(By.cssSelector(String.format("a[href='view.php?id=%s']", id)));
+    }
+
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
@@ -137,7 +141,9 @@ public class ContactHelper extends HelperBase{
     public ContactData infoFromEditForm(ContactData contact) {
         clickModifyContactById(contact.getId());
         String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String middleName = wd.findElement(By.name("middlename")).getAttribute("value");
         String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String nickname = wd.findElement(By.name("nickname")).getAttribute("value");
         String firstAddress = wd.findElement(By.name("address")).getText();
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
@@ -148,7 +154,14 @@ public class ContactHelper extends HelperBase{
 
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
-                .withFirstAddress(firstAddress).withHomePhone(home).withMobilePhoneString(mobile).withWorkPhoneString(work)
+                .withMiddleName(middleName).withNickname(nickname)
+                .withFirstAddress(firstAddress).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withFirstEmail(email).withSecondEmail(email2).withThirdEmail(email3);
+    }
+
+    public WebElement infoFromInfoForm(ContactData contact) {
+        clickInfoContactById(contact.getId());
+        WebElement element = wd.findElement(By.xpath(".//*[@id='content']"));
+        return element;
     }
 }
