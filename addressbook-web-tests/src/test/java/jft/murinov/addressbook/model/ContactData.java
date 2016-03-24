@@ -1,5 +1,7 @@
 package jft.murinov.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
     private int id = 0;
     private String firstName;
@@ -23,7 +25,12 @@ public class ContactData {
     private String address2;
     private String phone2;
     private String notes;
-    private String allName;
+    private File photo;
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -42,11 +49,6 @@ public class ContactData {
 
     public ContactData withLastName(String lastName) {
         this.lastName = lastName;
-        return this;
-    }
-
-    public ContactData withAllName(String allName) {
-        this.allName = allName;
         return this;
     }
 
@@ -241,6 +243,10 @@ public class ContactData {
 
     public String getWorkPhoneString() {
         return workPhoneString;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     @Override

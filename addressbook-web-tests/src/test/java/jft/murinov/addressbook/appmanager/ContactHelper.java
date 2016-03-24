@@ -28,6 +28,7 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("middlename"), contactData.getMiddleName());
         typeInfoBox(By.name("lastname"), contactData.getLastName());
         typeInfoBox(By.name("nickname"), contactData.getNickname());
+        attachFile(By.name("photo"), contactData.getPhoto());
         typeInfoBox(By.name("address"), contactData.getFirstAddress());
         typeInfoBox(By.name("home"), contactData.getHomePhone());
         typeInfoBox(By.name("mobile"), contactData.getMobilePhone());
@@ -35,6 +36,7 @@ public class ContactHelper extends HelperBase{
         typeInfoBox(By.name("email"), contactData.getFirstEmail());
         typeInfoBox(By.name("email2"), contactData.getSecondEmail());
         typeInfoBox(By.name("email3"), contactData.getThirdEmail());
+
 
         if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());

@@ -6,6 +6,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+
 /**
  * Created by Dima on 28.02.2016.
  */
@@ -24,6 +26,11 @@ public class HelperBase {
         click(locator);
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(textToEnter);
+    }
+
+    protected void attachFile(By locator, File file) {
+        if(file != null){
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());}
     }
 
     public boolean isAlertPresent() {
