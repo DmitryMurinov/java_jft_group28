@@ -29,7 +29,7 @@ public class ContactCreationTests extends TestBase{
         Contacts before = app.contact().all();
         File photo = new File("src/test/resources/people_to_remember.jpg");
         ContactData contact = new ContactData()
-                .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
+                .withFirstName("FirstName2Photo").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
                 .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup("test1").withPhoto(photo);
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
