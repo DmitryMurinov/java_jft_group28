@@ -59,7 +59,7 @@ public class ContactInfoTests extends TestBase{
     }
 
     private String cleaned(WebElement contactInfo){
-        String contact = contactInfo.getText().replaceAll("www.mailserver.ru|H:|M:|W:|Member of.*|\n| ", "").replace("()", "");
+        String contact = contactInfo.getText().replaceAll("www.mailserver.ru|H:|M:|W:|Member of.*|\n| |\\(|\\)", "");
         return contact;
     }
 
