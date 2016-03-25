@@ -1,5 +1,8 @@
 package jft.murinov.addressbook.generators;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import jft.murinov.addressbook.model.ContactData;
 
 import java.io.File;
@@ -14,12 +17,30 @@ import java.util.List;
  */
 public class ContactDataGenerator {
 
-    public static void main(String[] args) throws IOException {
-        int totalContacts = Integer.parseInt(args[0]);
-        File file = new File(args[1]);
+    @Parameter(names = "-c", description = "how many contact to generate")
+    public int contactsTotal;
 
-        List<ContactData> contacts = generateContact(totalContacts);
-        save(contacts, file);
+    @Parameter(names = "-f", description = "relayted to module path to file")
+    public String filepath;
+
+
+
+    public static void main(String[] args) throws IOException {
+
+        ContactDataGenerator generator = new ContactDataGenerator();
+        JCommander jCommander = new JCommander(generator);
+        try {
+            jCommander.parse(args);
+        }catch (ParameterException pe){
+            jCommander.usage();
+            return;
+        }
+        generator.run();
+    }
+
+    private void run() throws IOException {
+        List<ContactData> contacts = generateContact(contactsTotal);
+        save(contacts, new File(filepath));
     }
 
     private static void save(List<ContactData> contacts, File file) throws IOException {
