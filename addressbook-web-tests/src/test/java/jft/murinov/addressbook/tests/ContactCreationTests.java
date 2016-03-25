@@ -27,14 +27,14 @@ public class ContactCreationTests extends TestBase{
             list.add(new Object[] {new ContactData()
                     .withFirstName(split[0]).withMiddleName(split[1]).withLastName(split[2]).withNickname(split[3]).withFirstAddress(split[4])
                     .withHomePhone(split[5]).withMobilePhone(split[6]).withFirstEmail(split[7]).withGroup(split[8]).withPhoto(photo)});
-            reader.readLine();
+            line = reader.readLine();
         }
 
         return list.iterator();
     }
 
     @Test(enabled = true, dataProvider = "validContacts")
-    public void testContactCreationPhoto(ContactData contact) {
+    public void testContactCreation(ContactData contact) {
         Contacts before = app.contact().all();
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
