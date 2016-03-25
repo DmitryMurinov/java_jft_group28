@@ -30,19 +30,6 @@ public class ContactCreationTests extends TestBase{
                 .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup("test1").withPhoto(photo)});
         return list.iterator();
     }
-  /*
-    @Test(enabled = true)
-    public void testContactCreation() {
-        Contacts before = app.contact().all();
-        ContactData contact = new ContactData()
-                .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
-                .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup("test1");
-        app.contact().create(contact, true);
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
-        assertThat(after, equalTo(
-                before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-    }*/
 
     @Test(enabled = true, dataProvider = "validContacts")
     public void testContactCreationPhoto(ContactData contact) {
