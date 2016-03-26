@@ -3,6 +3,7 @@ package jft.murinov.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.GroupData;
 
 import java.io.File;
@@ -20,8 +21,11 @@ public class GroupDataGenerator {
     @Parameter(names = "-c", description = "Groups count")
     public int totalGroups;
 
-    @Parameter(names = "-f", description = "file name and path relayted to module folder")
+    @Parameter(names = "-path", description = "file name and path relayted to module folder")
     public String filename;
+
+    @Parameter(names = "-f", description = "file format, csv or xml")
+    public String format;
 
     public static void main(String[] args) throws IOException {
 
@@ -38,10 +42,32 @@ public class GroupDataGenerator {
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(totalGroups);
-        save(groups, new File(filename));
+        if(format.equals("csv")){
+            filename += "csv";
+        saveAsCSV(groups, new File(filename));
+        }else
+        if(format.equals("xml")){
+            filename += "xml";
+            saveAsXML(groups, new File(filename));
+            return;
+        }else {
+            System.out.println("Unrecognized format, choose csv or xml please " + format);
+        }
     }
 
-    private void save(List<GroupData> groups, File file) throws IOException {
+    private void saveAsXML(List<GroupData> groups, File file) throws IOException {
+
+        System.out.println(file.getAbsolutePath());
+        XStream xStream = new XStream();
+        xStream.processAnnotations(GroupData.class);
+        String xml = xStream.toXML(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+    }
+
+    private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
+        System.out.println(file.getAbsolutePath());
 
         Writer writer = new FileWriter(file);
 

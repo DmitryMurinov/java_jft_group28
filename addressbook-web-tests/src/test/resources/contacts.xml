@@ -1,0 +1,57 @@
+<list>
+  <Contact>
+    <firstName>FirstNameGen 0</firstName>
+    <middleName>MiddleNameGen 0</middleName>
+    <lastName>LastNameGen 0</lastName>
+    <nickname>NicknameGen 0</nickname>
+    <firstAddress>Address string Generated 0</firstAddress>
+    <homePhoneString>+74951234567</homePhoneString>
+    <mobilePhoneString>+75551234567</mobilePhoneString>
+    <firstEmail>nicknameGen0@mailserver.ru</firstEmail>
+    <group>test1</group>
+  </Contact>
+  <Contact>
+    <firstName>FirstNameGen 1</firstName>
+    <middleName>MiddleNameGen 1</middleName>
+    <lastName>LastNameGen 1</lastName>
+    <nickname>NicknameGen 1</nickname>
+    <firstAddress>Address string Generated 1</firstAddress>
+    <homePhoneString>+74951234567</homePhoneString>
+    <mobilePhoneString>+75551234567</mobilePhoneString>
+    <firstEmail>nicknameGen1@mailserver.ru</firstEmail>
+    <group>test1</group>
+  </Contact>
+  <Contact>
+    <firstName>FirstNameGen 2</firstName>
+    <middleName>MiddleNameGen 2</middleName>
+    <lastName>LastNameGen 2</lastName>
+    <nickname>NicknameGen 2</nickname>
+    <firstAddress>Address string Generated 2</firstAddress>
+    <homePhoneString>+74951234567</homePhoneString>
+    <mobilePhoneString>+75551234567</mobilePhoneString>
+    <firstEmail>nicknameGen2@mailserver.ru</firstEmail>
+    <group>test1</group>
+  </Contact>
+  <Contact>
+    <firstName>FirstNameGen 3</firstName>
+    <middleName>MiddleNameGen 3</middleName>
+    <lastName>LastNameGen 3</lastName>
+    <nickname>NicknameGen 3</nickname>
+    <firstAddress>Address string Generated 3</firstAddress>
+    <homePhoneString>+74951234567</homePhoneString>
+    <mobilePhoneString>+75551234567</mobilePhoneString>
+    <firstEmail>nicknameGen3@mailserver.ru</firstEmail>
+    <group>test1</group>
+  </Contact>
+  <Contact>
+    <firstName>FirstNameGen 4</firstName>
+    <middleName>MiddleNameGen 4</middleName>
+    <lastName>LastNameGen 4</lastName>
+    <nickname>NicknameGen 4</nickname>
+    <firstAddress>Address string Generated 4</firstAddress>
+    <homePhoneString>+74951234567</homePhoneString>
+    <mobilePhoneString>+75551234567</mobilePhoneString>
+    <firstEmail>nicknameGen4@mailserver.ru</firstEmail>
+    <group>test1</group>
+  </Contact>
+</list>

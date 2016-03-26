@@ -3,7 +3,9 @@ package jft.murinov.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.ContactData;
+import jft.murinov.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,10 +22,11 @@ public class ContactDataGenerator {
     @Parameter(names = "-c", description = "how many contact to generate")
     public int contactsTotal;
 
-    @Parameter(names = "-f", description = "relayted to module path to file")
-    public String filepath;
+    @Parameter(names = "-path", description = "file name and path relayted to module folder")
+    public String filename;
 
-
+    @Parameter(names = "-f", description = "file format, csv or xml")
+    public String format;
 
     public static void main(String[] args) throws IOException {
 
@@ -40,10 +43,20 @@ public class ContactDataGenerator {
 
     private void run() throws IOException {
         List<ContactData> contacts = generateContact(contactsTotal);
-        save(contacts, new File(filepath));
+        if(format.equals("csv")){
+            filename += "csv";
+            saveAsCSV(contacts, new File(filename));
+        }else
+        if(format.equals("xml")){
+            filename += "xml";
+            saveAsXML(contacts, new File(filename));
+            return;
+        }else {
+            System.out.println("Unrecognized format, choose csv or xml please " + format);
+        }
     }
 
-    private static void save(List<ContactData> contacts, File file) throws IOException {
+    private static void saveAsCSV(List<ContactData> contacts, File file) throws IOException {
 
         Writer writer = new FileWriter(file);
 
@@ -55,6 +68,16 @@ public class ContactDataGenerator {
         }
         writer.close();
 
+    }
+
+    private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
+        System.out.println(file.getAbsolutePath());
+        XStream xStream = new XStream();
+        xStream.processAnnotations(ContactData.class);
+        String xml = xStream.toXML(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
     }
 
     private static List<ContactData> generateContact(int totalContacts) {

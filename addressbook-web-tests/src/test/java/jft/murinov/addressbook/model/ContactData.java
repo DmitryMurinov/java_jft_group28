@@ -1,8 +1,14 @@
 package jft.murinov.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 
+@XStreamAlias("Contact")
 public class ContactData {
+
+    @XStreamOmitField
     private int id = 0;
     private String firstName;
     private String middleName;
@@ -25,6 +31,8 @@ public class ContactData {
     private String address2;
     private String phone2;
     private String notes;
+
+    @XStreamOmitField
     private File photo;
 
     public ContactData withPhoto(File photo) {
