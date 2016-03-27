@@ -1,5 +1,6 @@
 package jft.murinov.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -10,26 +11,47 @@ public class ContactData {
 
     @XStreamOmitField
     private int id = 0;
+    @Expose
     private String firstName;
+    @Expose
     private String middleName;
+    @Expose
     private String lastName;
+    @Expose
     private String nickname;
+    @Expose
     private String title;
+    @Expose
     private String company;
+    @Expose
     private String firstAddress;
+    @Expose
     private String homePhoneString;
+    @Expose
     private String mobilePhoneString;
+    @Expose
     private String workPhoneString;
+    @Expose
     private String fax;
+    @Expose
     private String firstEmail;
+    @Expose
     private String secondEmail;
+    @Expose
     private String thirdEmail;
+    @Expose
     private String homepage;
+    @Expose
     private String group;
+    @Expose
     private String allPhones;
+    @Expose
     private String allEmails;
+    @Expose
     private String address2;
+    @Expose
     private String phone2;
+    @Expose
     private String notes;
 
     @XStreamOmitField

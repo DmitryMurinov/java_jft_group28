@@ -1,5 +1,7 @@
 package jft.murinov.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
@@ -19,21 +21,25 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase{
 
     @DataProvider
-    public Iterator<Object[]> validContacts() throws IOException {
-/*        List<Object[]> list = new ArrayList<Object[]>();
+    public Iterator<Object[]> validContactsCSV() throws IOException {
+        List<Object[]> list = new ArrayList<Object[]>();
         File photo = new File("src/test/resources/people_to_remember.jpg");
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
         String line = reader.readLine();
 
-        while (line != null){
+        while (line != null) {
             String[] split = line.split(";");
-            list.add(new Object[] {new ContactData()
+            list.add(new Object[]{new ContactData()
                     .withFirstName(split[0]).withMiddleName(split[1]).withLastName(split[2]).withNickname(split[3]).withFirstAddress(split[4])
                     .withHomePhone(split[5]).withMobilePhone(split[6]).withFirstEmail(split[7]).withGroup(split[8]).withPhoto(photo)});
             line = reader.readLine();
         }
 
-        return list.iterator();*/
+        return list.iterator();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> validContactsXML() throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
 
@@ -51,7 +57,27 @@ public class ContactCreationTests extends TestBase{
         return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(enabled = true, dataProvider = "validContacts")
+    @DataProvider
+    public Iterator<Object[]> validContactsJSON() throws IOException {
+
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+
+        String json = "";
+        String line = reader.readLine();
+
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+
+        Gson gson = new Gson();
+
+        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+
+        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    }
+
+    @Test(enabled = true, dataProvider = "validContactsJSON")
     public void testContactCreation(ContactData contact) {
         Contacts before = app.contact().all();
         app.contact().create(contact, true);

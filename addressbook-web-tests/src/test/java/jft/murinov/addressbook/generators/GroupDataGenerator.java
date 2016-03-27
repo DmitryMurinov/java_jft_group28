@@ -3,6 +3,8 @@ package jft.murinov.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.GroupData;
 
@@ -21,7 +23,7 @@ public class GroupDataGenerator {
     @Parameter(names = "-c", description = "Groups count")
     public int totalGroups;
 
-    @Parameter(names = "-path", description = "file name and path relayted to module folder")
+    @Parameter(names = "-path", description = "file name and path relayed to module folder")
     public String filename;
 
     @Parameter(names = "-f", description = "file format, csv or xml")
@@ -50,9 +52,25 @@ public class GroupDataGenerator {
             filename += "xml";
             saveAsXML(groups, new File(filename));
             return;
+        }else
+        if(format.equals("json")){
+            filename += "json";
+            saveAsJSON(groups, new File(filename));
+            return;
         }else {
-            System.out.println("Unrecognized format, choose csv or xml please " + format);
+            System.out.println("Unrecognized format, choose csv or xml please json" + format);
         }
+    }
+
+    private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
+        System.out.println(file.getAbsolutePath());
+
+        Writer writer = new FileWriter(file);
+
+        for (GroupData group : groups){
+            writer.write(String.format("%s;%s;%s\n", group.getGroupName(), group.getGroupHeader(), group.getGroupFooter()));
+        }
+        writer.close();
     }
 
     private void saveAsXML(List<GroupData> groups, File file) throws IOException {
@@ -66,14 +84,11 @@ public class GroupDataGenerator {
         writer.close();
     }
 
-    private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
-        System.out.println(file.getAbsolutePath());
-
+    private void saveAsJSON(List<GroupData> groups, File file) throws IOException {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+        String json = gson.toJson(groups);
         Writer writer = new FileWriter(file);
-
-        for (GroupData group : groups){
-            writer.write(String.format("%s;%s;%s\n", group.getGroupName(), group.getGroupHeader(), group.getGroupFooter()));
-        }
+        writer.write(json);
         writer.close();
     }
 
