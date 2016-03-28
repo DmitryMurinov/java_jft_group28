@@ -87,7 +87,7 @@ public class ContactCreationTests extends TestBase{
         }
     }
 
-    @Test(enabled = true, dataProvider = "validContactsJSON")
+    @Test(enabled = false, dataProvider = "validContactsJSON")
     public void testContactCreation(ContactData contact) {
         Contacts before = app.contact().all();
         app.contact().create(contact, true);
@@ -97,7 +97,7 @@ public class ContactCreationTests extends TestBase{
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void testBadContactCreation() {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData()

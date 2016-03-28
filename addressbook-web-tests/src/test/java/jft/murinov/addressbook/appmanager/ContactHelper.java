@@ -24,24 +24,37 @@ public class ContactHelper extends HelperBase{
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
-        typeInfoBox(By.name("firstname"), contactData.getFirstName());
-        typeInfoBox(By.name("middlename"), contactData.getMiddleName());
-        typeInfoBox(By.name("lastname"), contactData.getLastName());
-        typeInfoBox(By.name("nickname"), contactData.getNickname());
-        attachFile(By.name("photo"), contactData.getPhoto());
-        typeInfoBox(By.name("address"), contactData.getFirstAddress());
-        typeInfoBox(By.name("home"), contactData.getHomePhone());
-        typeInfoBox(By.name("mobile"), contactData.getMobilePhone());
-        typeInfoBox(By.name("work"), contactData.getMobilePhone());
-        typeInfoBox(By.name("email"), contactData.getFirstEmail());
-        typeInfoBox(By.name("email2"), contactData.getSecondEmail());
-        typeInfoBox(By.name("email3"), contactData.getThirdEmail());
+        if(contactData.getFirstName() != null){
+        typeInfoBox(By.name("firstname"), contactData.getFirstName());}
+        if(contactData.getMiddleName() != null){
+        typeInfoBox(By.name("middlename"), contactData.getMiddleName());}
+        if(contactData.getLastName() != null){
+        typeInfoBox(By.name("lastname"), contactData.getLastName());}
+        if(contactData.getNickname() != null){
+        typeInfoBox(By.name("nickname"), contactData.getNickname());}
+        if(contactData.getPhoto() != null){
+        attachFile(By.name("photo"), contactData.getPhoto());}
+        if(contactData.getFirstAddress() != null){
+        typeInfoBox(By.name("address"), contactData.getFirstAddress());}
+        if(contactData.getHomePhone() != null){
+        typeInfoBox(By.name("home"), contactData.getHomePhone());}
+        if(contactData.getMobilePhone() != null){
+        typeInfoBox(By.name("mobile"), contactData.getMobilePhone());}
+        if(contactData.getWorkPhone() != null){
+        typeInfoBox(By.name("work"), contactData.getWorkPhone());}
+        if(contactData.getFirstEmail() != null){
+        typeInfoBox(By.name("email"), contactData.getFirstEmail());}
+        if(contactData.getSecondEmail() != null){
+        typeInfoBox(By.name("email2"), contactData.getSecondEmail());}
+        if(contactData.getThirdEmail() != null){
+        typeInfoBox(By.name("email3"), contactData.getThirdEmail());}
 
-
-        if(creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        if(contactData.getGroup() != null) {
+            if (creation) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            } else {
+                Assert.assertFalse(isElementPresent(By.name("new_group")));
+            }
         }
     }
 
