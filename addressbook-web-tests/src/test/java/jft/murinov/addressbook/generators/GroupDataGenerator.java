@@ -26,7 +26,7 @@ public class GroupDataGenerator {
     @Parameter(names = "-path", description = "file name and path relayed to module folder")
     public String filename;
 
-    @Parameter(names = "-f", description = "file format, csv or xml")
+    @Parameter(names = "-f", description = "file format, csv, xml or json")
     public String format;
 
     public static void main(String[] args) throws IOException {
@@ -63,33 +63,37 @@ public class GroupDataGenerator {
     }
 
     private void saveAsCSV(List<GroupData> groups, File file) throws IOException {
-        System.out.println(file.getAbsolutePath());
 
+        try(
         Writer writer = new FileWriter(file);
-
-        for (GroupData group : groups){
-            writer.write(String.format("%s;%s;%s\n", group.getGroupName(), group.getGroupHeader(), group.getGroupFooter()));
+        ) {
+            for (GroupData group : groups) {
+                writer.write(String.format("%s;%s;%s\n", group.getGroupName(), group.getGroupHeader(), group.getGroupFooter()));
+            }
         }
-        writer.close();
     }
 
     private void saveAsXML(List<GroupData> groups, File file) throws IOException {
 
-        System.out.println(file.getAbsolutePath());
         XStream xStream = new XStream();
         xStream.processAnnotations(GroupData.class);
         String xml = xStream.toXML(groups);
+        try(
         Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        ) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsJSON(List<GroupData> groups, File file) throws IOException {
+
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         String json = gson.toJson(groups);
+        try(
         Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        ) {
+            writer.write(json);
+        }
     }
 
     private List<GroupData> generateGroups(int totalGroups) {

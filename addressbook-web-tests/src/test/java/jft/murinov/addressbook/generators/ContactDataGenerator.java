@@ -27,7 +27,7 @@ public class ContactDataGenerator {
     @Parameter(names = "-path", description = "file name and path relayed to module folder")
     public String filename;
 
-    @Parameter(names = "-f", description = "file format, csv or xml")
+    @Parameter(names = "-f", description = "file format, csv, xml or json")
     public String format;
 
     public static void main(String[] args) throws IOException {
@@ -66,32 +66,37 @@ public class ContactDataGenerator {
 
     private static void saveAsCSV(List<ContactData> contacts, File file) throws IOException {
 
+        try(
         Writer writer = new FileWriter(file);
-
-        for(ContactData contact : contacts){
-            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
-                    contact.getFirstName(), contact.getMiddleName(), contact.getLastName(),
-                    contact.getNickname(), contact.getFirstAddress(), contact.getHomePhone(),
-                    contact.getMobilePhone(), contact.getFirstEmail(), contact.getGroup()));
+        ) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
+                        contact.getFirstName(), contact.getMiddleName(), contact.getLastName(),
+                        contact.getNickname(), contact.getFirstAddress(), contact.getHomePhone(),
+                        contact.getMobilePhone(), contact.getFirstEmail(), contact.getGroup()));
+            }
         }
-        writer.close();
     }
 
     private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactData.class);
         String xml = xStream.toXML(contacts);
+        try(
         Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        ) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         String json = gson.toJson(contacts);
+        try(
         Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        ) {
+            writer.write(json);
+        }
     }
 
     private static List<ContactData> generateContact(int totalContacts) {

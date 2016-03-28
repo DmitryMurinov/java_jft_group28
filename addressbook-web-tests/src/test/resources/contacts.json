@@ -31,27 +31,5 @@
     "mobilePhoneString": "+75551234567",
     "firstEmail": "nicknameGen2@mailserver.ru",
     "group": "test1"
-  },
-  {
-    "firstName": "FirstNameGen 3",
-    "middleName": "MiddleNameGen 3",
-    "lastName": "LastNameGen 3",
-    "nickname": "NicknameGen 3",
-    "firstAddress": "Address string Generated 3",
-    "homePhoneString": "+74951234567",
-    "mobilePhoneString": "+75551234567",
-    "firstEmail": "nicknameGen3@mailserver.ru",
-    "group": "test1"
-  },
-  {
-    "firstName": "FirstNameGen 4",
-    "middleName": "MiddleNameGen 4",
-    "lastName": "LastNameGen 4",
-    "nickname": "NicknameGen 4",
-    "firstAddress": "Address string Generated 4",
-    "homePhoneString": "+74951234567",
-    "mobilePhoneString": "+75551234567",
-    "firstEmail": "nicknameGen4@mailserver.ru",
-    "group": "test1"
   }
 ]
