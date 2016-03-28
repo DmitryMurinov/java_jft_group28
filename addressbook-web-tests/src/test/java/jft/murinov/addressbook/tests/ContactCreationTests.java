@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
-import jft.murinov.addressbook.model.GroupData;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
