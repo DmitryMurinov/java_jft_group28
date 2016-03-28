@@ -8,7 +8,7 @@
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
     "firstEmail": "nicknameGen0@mailserver.ru",
-    "group": "test1"
+    "group": "test group 1"
   },
   {
     "firstName": "FirstNameGen 1",
@@ -19,7 +19,7 @@
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
     "firstEmail": "nicknameGen1@mailserver.ru",
-    "group": "test1"
+    "group": "test group 1"
   },
   {
     "firstName": "FirstNameGen 2",
@@ -30,6 +30,6 @@
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
     "firstEmail": "nicknameGen2@mailserver.ru",
-    "group": "test1"
+    "group": "test group 1"
   }
 ]

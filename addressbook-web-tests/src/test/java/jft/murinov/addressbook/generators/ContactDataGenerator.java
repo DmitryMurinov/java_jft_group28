@@ -107,7 +107,7 @@ public class ContactDataGenerator {
                     .withLastName(String.format("LastNameGen %s", i)).withNickname(String.format("NicknameGen %s", i))
                     .withFirstAddress(String.format("Address string Generated %s", i))
                     .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail(String.format("nicknameGen%s@mailserver.ru", i))
-                    .withGroup("test1"))
+                    .withGroup("test group 1"))
             ;
         }
         return contacts;
