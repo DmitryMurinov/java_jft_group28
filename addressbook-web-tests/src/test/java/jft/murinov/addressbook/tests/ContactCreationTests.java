@@ -3,6 +3,8 @@ package jft.murinov.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import jft.murinov.addressbook.appmanager.ContactHelper;
+import jft.murinov.addressbook.appmanager.HelperBase;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
 import org.testng.annotations.DataProvider;
@@ -87,8 +89,9 @@ public class ContactCreationTests extends TestBase{
         }
     }
 
-    @Test(enabled = false, dataProvider = "validContactsJSON")
+    @Test(enabled = true, dataProvider = "validContactsJSON")
     public void testContactCreation(ContactData contact) {
+        app.contact().openStartPage();
         Contacts before = app.contact().all();
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -97,7 +100,7 @@ public class ContactCreationTests extends TestBase{
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testBadContactCreation() {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData()

@@ -23,6 +23,7 @@ public class ContactModifyTests extends TestBase {
 
     @Test(enabled = true)
     public void testContactModify() {
+        app.contact().openStartPage();
         Contacts before = app.contact().all();
         ContactData contactToModify = before.iterator().next();
         ContactData contact = new ContactData()

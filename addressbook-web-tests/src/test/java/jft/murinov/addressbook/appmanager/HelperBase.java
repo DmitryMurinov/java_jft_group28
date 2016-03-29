@@ -33,6 +33,10 @@ public class HelperBase {
             wd.findElement(locator).sendKeys(file.getAbsolutePath());}
     }
 
+    public void openStartPage() {
+        click(By.xpath(".//*[@id='nav']/ul/li[1]/a"));
+    }
+
     public boolean isAlertPresent() {
         try {
             wd.switchTo().alert();

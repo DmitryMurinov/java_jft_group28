@@ -23,6 +23,7 @@ public class ContactDeletionTests extends TestBase{
 
     @Test(enabled = true)
     public void testContactDeletion() {
+        app.contact().openStartPage();
         Contacts before = app.contact().all();
         ContactData contactToDelete = before.iterator().next();
         app.contact().delete(contactToDelete);
