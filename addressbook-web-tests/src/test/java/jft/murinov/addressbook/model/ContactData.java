@@ -3,62 +3,133 @@ package jft.murinov.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("Contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = 0;
+
     @Expose
+    @Column(name = "firstname")
     private String firstName;
+
     @Expose
+    @Column(name = "middlename")
     private String middleName;
+
     @Expose
+    @Column(name = "lastname")
     private String lastName;
+
     @Expose
+    @Column(name = "nickname")
     private String nickname;
+
     @Expose
+    @Column(name = "title")
     private String title;
+
     @Expose
+    @Column(name = "company")
     private String company;
+
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String firstAddress;
+
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhoneString;
+
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhoneString;
+
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhoneString;
+
     @Expose
+    @Column(name = "fax")
+    @Type(type = "text")
     private String fax;
+
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String firstEmail;
+
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String secondEmail;
+
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String thirdEmail;
+
     @Expose
+    @Column(name = "homepage")
+    @Type(type = "text")
     private String homepage;
+
     @Expose
+    @Transient
     private String group;
+
     @Expose
+    @Transient
     private String allPhones;
+
     @Expose
+    @Transient
     private String allEmails;
+
     @Expose
+    @Column(name = "address2")
+    @Type(type = "text")
     private String address2;
+
     @Expose
+    @Column(name = "phone2")
+    @Type(type = "text")
     private String phone2;
+
     @Expose
+    @Column(name = "notes")
+    @Type(type = "text")
     private String notes;
 
     @XStreamOmitField
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -276,7 +347,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
@@ -298,15 +369,6 @@ public class ContactData {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-
-        return "ContactData{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
 }
