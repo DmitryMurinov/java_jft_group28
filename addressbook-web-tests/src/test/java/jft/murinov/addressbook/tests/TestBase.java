@@ -1,6 +1,11 @@
 package jft.murinov.addressbook.tests;
 
 import jft.murinov.addressbook.appmanager.ApplicationManager;
+import jft.murinov.addressbook.model.ContactData;
+import jft.murinov.addressbook.model.Contacts;
+import jft.murinov.addressbook.model.GroupData;
+import jft.murinov.addressbook.model.Groups;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
@@ -11,6 +16,10 @@ import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -41,4 +50,26 @@ public class TestBase {
         logger.info("Stop test" + m.getName());
     }
 
+    public void verifyGroupListInUI() {
+        if (Boolean.getBoolean("verifyUI")) {
+            Groups dbGroups = app.db().groups();
+            Groups uiGroups = app.group().all();
+
+            assertThat(uiGroups, equalTo(dbGroups.stream()
+                    .map((g) -> new GroupData().withId(g.getId()).withName(g.getGroupName()))
+                    .collect(Collectors.toSet())));
+        }
+    }
+
+    public void verifyContactListInUI() {
+        if (Boolean.getBoolean("verifyUI")) {
+            Contacts dbContacts = app.db().contacts();
+            Contacts uiContacts = app.contact().all();
+
+            assertThat(uiContacts, equalTo(dbContacts.stream()
+                    .map((c) -> new ContactData().withId(c.getId()).withFirstName(c.getFirstName()).withLastName(c.getLastName())
+                    .withFirstAddress(c.getFirstAddress()))
+                    .collect(Collectors.toSet())));
+        }
+    }
 }
