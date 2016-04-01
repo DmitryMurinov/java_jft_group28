@@ -92,15 +92,15 @@ public class ContactCreationTests extends TestBase{
     @Test(enabled = true, dataProvider = "validContactsJSON")
     public void testContactCreation(ContactData contact) {
         app.contact().openStartPage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.contact().create(contact, true);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void testBadContactCreation() {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData()

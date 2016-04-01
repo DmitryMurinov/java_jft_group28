@@ -288,8 +288,6 @@ public class ContactData {
         return id;
     }
 
-
-
     public String getNickname() {
         return nickname;
     }
@@ -347,7 +345,10 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return new File(photo);
+        if(photo != null) {
+            return new File(photo);
+        }
+        return null;
     }
 
     @Override
