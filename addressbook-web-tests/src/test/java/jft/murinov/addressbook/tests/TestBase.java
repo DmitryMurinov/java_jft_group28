@@ -68,8 +68,25 @@ public class TestBase {
 
             assertThat(uiContacts, equalTo(dbContacts.stream()
                     .map((c) -> new ContactData().withId(c.getId()).withFirstName(c.getFirstName()).withLastName(c.getLastName())
-                    .withFirstAddress(c.getFirstAddress()))
+                    .withFirstAddress(c.getFirstAddress()).withAllEmail(mergeEmails(c)).withAllPhones(mergePhones(c)))
                     .collect(Collectors.toSet())));
         }
+    }
+
+    public String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getFirstEmail(), contact.getSecondEmail(), contact.getThirdEmail())
+                .stream().filter(s -> ! s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+                .stream().filter(s -> ! s.equals(""))
+                .map(TestBase::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+    public static String cleaned(String phone){
+        return  phone.replaceAll("\\s", "").replaceAll("\\(", "").replaceAll("-", "").replaceAll("\\)", "");
     }
 }
