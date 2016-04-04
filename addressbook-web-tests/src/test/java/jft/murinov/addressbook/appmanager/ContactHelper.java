@@ -49,9 +49,10 @@ public class ContactHelper extends HelperBase{
         if(contactData.getThirdEmail() != null){
         typeInfoBox(By.name("email3"), contactData.getThirdEmail());}
 
-        if(contactData.getGroup() != null) {
+        if(contactData.getGroups().size() > 0) {
             if (creation) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getGroupName());
             } else {
                 Assert.assertFalse(isElementPresent(By.name("new_group")));
             }
@@ -146,7 +147,7 @@ public class ContactHelper extends HelperBase{
 
             contactCache.add(new ContactData()
                     .withId(id).withFirstName(fname).withMiddleName("MiddleName").withLastName(lname).withNickname("Nickname")
-                    .withFirstAddress(address).withAllPhones(allPhones).withFirstEmail("nickname@mailserver.ru").withAllEmail(allEmails).withGroup("test1"));
+                    .withFirstAddress(address).withAllPhones(allPhones).withFirstEmail("nickname@mailserver.ru").withAllEmail(allEmails));
         }
 
         return new Contacts(contactCache);

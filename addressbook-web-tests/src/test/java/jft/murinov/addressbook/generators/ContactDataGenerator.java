@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.GroupData;
+import jft.murinov.addressbook.model.Groups;
+import jft.murinov.addressbook.tests.TestBase;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,7 +22,7 @@ import java.util.List;
 /**
  * Created by d.murinov on 24.03.2016.
  */
-public class ContactDataGenerator {
+public class ContactDataGenerator extends TestBase{
 
     @Parameter(names = "-c", description = "how many contact to generate")
     public int contactsTotal;
@@ -41,6 +44,14 @@ public class ContactDataGenerator {
             return;
         }
         generator.run();
+    }
+
+    @BeforeMethod
+    public void insurePrecondition(){
+        app.goTo().GroupPage();
+        if (app.db().groups().size() == 0){
+            app.group().create(new GroupData().withName("test1"));
+        }
     }
 
     private void run() throws IOException {
@@ -73,7 +84,7 @@ public class ContactDataGenerator {
                 writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
                         contact.getFirstName(), contact.getMiddleName(), contact.getLastName(),
                         contact.getNickname(), contact.getFirstAddress(), contact.getHomePhone(),
-                        contact.getMobilePhone(), contact.getFirstEmail(), contact.getGroup()));
+                        contact.getMobilePhone(), contact.getFirstEmail(), contact.getGroups()));
             }
         }
     }
@@ -101,13 +112,15 @@ public class ContactDataGenerator {
 
     private static List<ContactData> generateContact(int totalContacts) {
         List<ContactData> contacts = new ArrayList<ContactData>();
+        Groups groups = app.db().groups();
+
         for(int i = 0; i < totalContacts; i++){
             contacts.add(new ContactData()
                     .withFirstName(String.format("FirstNameGen %s", i)).withMiddleName(String.format("MiddleNameGen %s", i))
                     .withLastName(String.format("LastNameGen %s", i)).withNickname(String.format("NicknameGen %s", i))
                     .withFirstAddress(String.format("Address string Generated %s", i))
                     .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail(String.format("nicknameGen%s@mailserver.ru", i))
-                    .withGroup("test group 1"))
+                    .withGroup(groups.iterator().next()))
             ;
         }
         return contacts;

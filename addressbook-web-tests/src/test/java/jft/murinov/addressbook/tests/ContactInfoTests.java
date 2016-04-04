@@ -1,6 +1,7 @@
 package jft.murinov.addressbook.tests;
 
 import jft.murinov.addressbook.model.ContactData;
+import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -20,6 +21,10 @@ public class ContactInfoTests extends TestBase{
 
     @BeforeMethod
     public void insurePreconditions(){
+        app.goTo().GroupPage();
+        if (app.db().groups().size() == 0){
+            app.group().create(new GroupData().withName("test1"));
+        }
         app.goTo().HomePage();
         if (app.db().contacts().size() == 0){
             app.contact().create(new ContactData()
@@ -27,7 +32,7 @@ public class ContactInfoTests extends TestBase{
                             .withTitle("Software Engineer").withCompany("Google").withFirstAddress("Address string")
                             .withHomePhone("+74951234567").withMobilePhone("+75551234567").withWorkPhone("22-55").withFax("12345-888")
                             .withFirstEmail("nickname@mailserver.ru").withSecondEmail("nickname2@mailserver.ru").withThirdEmail("nickname2@mailserver.ru")
-                            .withHomepage("www.google.com").withGroup("test1").withAddress2("Miami beach road 88").withPhone2("USA-MIAMI-DIMA").withNotes("It's good to have a dream")
+                            .withHomepage("www.google.com")//.withGroup("test1").withAddress2("Miami beach road 88").withPhone2("USA-MIAMI-DIMA").withNotes("It's good to have a dream")
                     , true);
         }
     }

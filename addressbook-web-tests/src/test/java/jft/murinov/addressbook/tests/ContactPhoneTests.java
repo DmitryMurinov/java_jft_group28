@@ -19,7 +19,7 @@ public class ContactPhoneTests extends TestBase{
             app.contact().create(new ContactData()
                             .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
                             .withHomePhone("+74951234567").withMobilePhone("+75551234567").withWorkPhone("22-55").withFirstEmail("nickname@mailserver.ru")
-                            .withSecondEmail("nickname2@mailserver.ru").withThirdEmail("nickname2@mailserver.ru").withGroup("test1")
+                            .withSecondEmail("nickname2@mailserver.ru").withThirdEmail("nickname2@mailserver.ru")//.withGroup("test1")
                     , true);
         }
     }
