@@ -46,15 +46,11 @@ public class ContactDataGenerator extends TestBase{
         generator.run();
     }
 
-    @BeforeMethod
-    public void insurePrecondition(){
+    private void run() throws IOException {
         app.goTo().GroupPage();
         if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withName("test1"));
         }
-    }
-
-    private void run() throws IOException {
         List<ContactData> contacts = generateContact(contactsTotal);
         if(format.equals("csv")){
             filename += "csv";
