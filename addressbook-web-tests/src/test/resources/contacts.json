@@ -7,7 +7,14 @@
     "firstAddress": "Address string Generated 0",
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
-    "firstEmail": "nicknameGen0@mailserver.ru"
+    "firstEmail": "nicknameGen0@mailserver.ru",
+    "groups": [
+      {
+        "groupName": "test group 78",
+        "groupHeader": "test header 78",
+        "groupFooter": "test footer 78"
+      }
+    ]
   },
   {
     "firstName": "FirstNameGen 1",
@@ -17,7 +24,14 @@
     "firstAddress": "Address string Generated 1",
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
-    "firstEmail": "nicknameGen1@mailserver.ru"
+    "firstEmail": "nicknameGen1@mailserver.ru",
+    "groups": [
+      {
+        "groupName": "test group 78",
+        "groupHeader": "test header 78",
+        "groupFooter": "test footer 78"
+      }
+    ]
   },
   {
     "firstName": "FirstNameGen 2",
@@ -27,6 +41,13 @@
     "firstAddress": "Address string Generated 2",
     "homePhoneString": "+74951234567",
     "mobilePhoneString": "+75551234567",
-    "firstEmail": "nicknameGen2@mailserver.ru"
+    "firstEmail": "nicknameGen2@mailserver.ru",
+    "groups": [
+      {
+        "groupName": "test group 78",
+        "groupHeader": "test header 78",
+        "groupFooter": "test footer 78"
+      }
+    ]
   }
 ]

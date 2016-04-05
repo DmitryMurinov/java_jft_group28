@@ -117,6 +117,7 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
+    @Expose
     @ManyToMany
     @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<GroupData> groups = new HashSet<GroupData>();

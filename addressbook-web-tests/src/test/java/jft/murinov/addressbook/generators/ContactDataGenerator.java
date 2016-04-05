@@ -34,7 +34,6 @@ public class ContactDataGenerator extends TestBase{
     public String format;
 
     public static void main(String[] args) throws IOException {
-
         ContactDataGenerator generator = new ContactDataGenerator();
         JCommander jCommander = new JCommander(generator);
         try {
@@ -44,9 +43,11 @@ public class ContactDataGenerator extends TestBase{
             return;
         }
         generator.run();
+        app.stop();
     }
 
     private void run() throws IOException {
+        app.init();
         app.goTo().GroupPage();
         if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withName("test1"));

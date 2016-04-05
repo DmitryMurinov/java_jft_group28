@@ -25,7 +25,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase{
-/*
+
 
     @DataProvider
     public Iterator<Object[]> validContactsCSV() throws IOException {
@@ -38,18 +38,20 @@ public class ContactCreationTests extends TestBase{
 
         String line = reader.readLine();
 
+
+
         while (line != null) {
             String[] split = line.split(";");
             list.add(new Object[]{new ContactData()
                     .withFirstName(split[0]).withMiddleName(split[1]).withLastName(split[2]).withNickname(split[3]).withFirstAddress(split[4])
-                    .withHomePhone(split[5]).withMobilePhone(split[6]).withFirstEmail(split[7]).withGroup(split[8]).withPhoto(photo)});
+                    .withHomePhone(split[5]).withMobilePhone(split[6]).withFirstEmail(split[7]).withPhoto(photo)});
             line = reader.readLine();
         }
 
         return list.iterator();
         }
     }
-*/
+
 
     @DataProvider
     public Iterator<Object[]> validContactsXML() throws IOException {
@@ -131,111 +133,4 @@ public class ContactCreationTests extends TestBase{
         verifyContactListInUI();
     }
 
-    /**
-     * Created by d.murinov on 24.03.2016.
-     */
-    public static class ContactDataGenerator extends TestBase{
-
-        @Parameter(names = "-c", description = "how many contact to generate")
-        public int contactsTotal;
-
-        @Parameter(names = "-path", description = "file name and path relayed to module folder")
-        public String filename;
-
-        @Parameter(names = "-f", description = "file format, csv, xml or json")
-        public String format;
-
-        @BeforeMethod
-        public void insurePrecondition(){
-            app.goTo().GroupPage();
-            if (app.db().groups().size() == 0){
-                app.group().create(new GroupData().withName("test1"));
-            }
-        }
-
-        public static void main(String[] args) throws IOException {
-
-            ContactDataGenerator generator = new ContactDataGenerator();
-            JCommander jCommander = new JCommander(generator);
-            try {
-                jCommander.parse(args);
-            }catch (ParameterException pe){
-                jCommander.usage();
-                return;
-            }
-            generator.run();
-        }
-
-        private void run() throws IOException {
-            List<ContactData> contacts = generateContact(contactsTotal);
-            if(format.equals("csv")){
-                filename += "csv";
-                saveAsCSV(contacts, new File(filename));
-            }else
-            if(format.equals("xml")){
-                filename += "xml";
-                saveAsXML(contacts, new File(filename));
-                return;
-            }else
-            if(format.equals("json")) {
-                filename += "json";
-                saveAsJSON(contacts, new File(filename));
-                return;
-            }else
-            {
-                System.out.println("Unrecognized format, choose csv or xml please " + format);
-            }
-        }
-
-        private static void saveAsCSV(List<ContactData> contacts, File file) throws IOException {
-
-            try(
-            Writer writer = new FileWriter(file);
-            ) {
-                for (ContactData contact : contacts) {
-                    writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
-                            contact.getFirstName(), contact.getMiddleName(), contact.getLastName(),
-                            contact.getNickname(), contact.getFirstAddress(), contact.getHomePhone(),
-                            contact.getMobilePhone(), contact.getFirstEmail(), contact.getGroups()));
-                }
-            }
-        }
-
-        private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
-            XStream xStream = new XStream();
-            xStream.processAnnotations(ContactData.class);
-            String xml = xStream.toXML(contacts);
-            try(
-            Writer writer = new FileWriter(file);
-            ) {
-                writer.write(xml);
-            }
-        }
-
-        private void saveAsJSON(List<ContactData> contacts, File file) throws IOException {
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
-            String json = gson.toJson(contacts);
-            try(
-            Writer writer = new FileWriter(file);
-            ) {
-                writer.write(json);
-            }
-        }
-
-        private static List<ContactData> generateContact(int totalContacts) {
-            List<ContactData> contacts = new ArrayList<ContactData>();
-            Groups groups = app.db().groups();
-            for(int i = 0; i < totalContacts; i++){
-                contacts.add(new ContactData()
-                        .withFirstName(String.format("FirstNameGen %s", i)).withMiddleName(String.format("MiddleNameGen %s", i))
-                        .withLastName(String.format("LastNameGen %s", i)).withNickname(String.format("NicknameGen %s", i))
-                        .withFirstAddress(String.format("Address string Generated %s", i))
-                        .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail(String.format("nicknameGen%s@mailserver.ru", i))
-    //                    .withGroup(groups.iterator().next())
-                )
-                ;
-            }
-            return contacts;
-        }
-    }
 }
