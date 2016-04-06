@@ -5,8 +5,6 @@ import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
 import jft.murinov.addressbook.model.GroupData;
 import jft.murinov.addressbook.model.Groups;
-import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +54,7 @@ public class TestBase {
             Groups uiGroups = app.group().all();
 
             assertThat(uiGroups, equalTo(dbGroups.stream()
-                    .map((g) -> new GroupData().withId(g.getId()).withName(g.getGroupName()))
+                    .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
                     .collect(Collectors.toSet())));
         }
     }

@@ -64,7 +64,7 @@ public class GroupData {
         return id;
     }
 
-    public String getGroupName() {
+    public String getName() {
         return groupName;
     }
 

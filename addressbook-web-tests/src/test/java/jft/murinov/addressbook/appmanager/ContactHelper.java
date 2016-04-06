@@ -2,6 +2,7 @@ package jft.murinov.addressbook.appmanager;
 
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
+import jft.murinov.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,7 +53,7 @@ public class ContactHelper extends HelperBase{
         if(contactData.getGroups().size() > 0) {
             if (creation) {
                 Assert.assertTrue(contactData.getGroups().size() == 1);
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getGroupName());
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
             } else {
                 Assert.assertFalse(isElementPresent(By.name("new_group")));
             }
@@ -153,6 +154,25 @@ public class ContactHelper extends HelperBase{
         return new Contacts(contactCache);
     }
 
+    public String findGroupName() {
+        WebElement groupsBox = wd.findElement(By.cssSelector(".right>select"));
+        List<WebElement> webGroups = groupsBox.findElements(By.name("option"));
+        return webGroups.iterator().next().getText();
+    }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroup(group.getName());
+        clickOnAddTo();
+    }
+
+    private void clickOnAddTo() {
+        click(By.cssSelector(".right>input"));
+    }
+
+    private void selectGroup(String name) {
+        click(By.linkText(name));
+    }
 
     public ContactData infoFromEditForm(ContactData contact) {
         clickModifyContactById(contact.getId());

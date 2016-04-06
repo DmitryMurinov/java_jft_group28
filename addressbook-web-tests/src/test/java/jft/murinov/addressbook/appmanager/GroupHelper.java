@@ -5,13 +5,8 @@ import jft.murinov.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -31,8 +26,8 @@ public class GroupHelper extends HelperBase{
     }
 
     public void fillGroupCreationForm(GroupData groupData) {
-        if(groupData.getGroupName() != null){
-        typeInfoBox(By.name("group_name"), groupData.getGroupName());}
+        if(groupData.getName() != null){
+        typeInfoBox(By.name("group_name"), groupData.getName());}
         if(groupData.getGroupHeader() != null){
         typeInfoBox(By.name("group_header"), groupData.getGroupHeader());}
         if(groupData.getGroupFooter() != null){
