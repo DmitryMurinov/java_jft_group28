@@ -45,5 +45,4 @@ public class DBHelper {
         session.close();
         return new Contacts(result);
     }
-
 }

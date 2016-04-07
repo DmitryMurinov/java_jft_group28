@@ -3,6 +3,7 @@ package jft.murinov.addressbook.appmanager;
 import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
 import jft.murinov.addressbook.model.GroupData;
+import jft.murinov.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Dima on 28.02.2016.
@@ -156,8 +158,32 @@ public class ContactHelper extends HelperBase{
 
     public String findGroupName() {
         WebElement groupsBox = wd.findElement(By.cssSelector(".right>select"));
-        List<WebElement> webGroups = groupsBox.findElements(By.name("option"));
-        return webGroups.iterator().next().getText();
+        List<WebElement> webGroups = groupsBox.findElements(By.tagName("option"));
+        int groupNumber = randomNumber(0, webGroups.size() - 1);
+        return webGroups.get(groupNumber).getText();
+    }
+
+
+    public static int randomNumber(int min, int max) {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+    public Groups findAllGroupsForContact(WebElement contactInfo) {
+        System.out.println(contactInfo);
+        Groups contactGroups = new Groups();
+        return contactGroups;
+    }
+
+    public Groups findAllGroupsToAdd() {
+        WebElement groupsBox = wd.findElement(By.cssSelector(".right>select"));
+        List<WebElement> webGroups = groupsBox.findElements(By.tagName("option"));
+        Groups groupsForContact = new Groups();
+        for(int i = 0; i < webGroups.size(); i++){
+            groupsForContact.add(new GroupData().withName(webGroups.get(i).getText()));
+        }
+        return groupsForContact;
     }
 
     public void addContactToGroup(ContactData contact, GroupData group) {
@@ -171,7 +197,8 @@ public class ContactHelper extends HelperBase{
     }
 
     private void selectGroup(String name) {
-        click(By.linkText(name));
+        WebElement groupsBox = wd.findElement(By.cssSelector(".right>select"));
+        new Select(wd.findElement(By.xpath(".//*[@id='content']/form[2]/div[4]/select"))).selectByVisibleText(name);
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
@@ -200,4 +227,6 @@ public class ContactHelper extends HelperBase{
         WebElement element = wd.findElement(By.xpath(".//*[@id='content']"));
         return element;
     }
+
+
 }
