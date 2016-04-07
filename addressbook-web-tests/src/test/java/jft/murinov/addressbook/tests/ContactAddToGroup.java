@@ -11,6 +11,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.StringTokenizer;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
@@ -39,9 +41,7 @@ public class ContactAddToGroup extends TestBase{
     }
 
     @Test(enabled = true)
-    public void testContactAddToGroup(){
-        Contacts contacts = app.contact().all();
-//        Groups groups = app.db().groups();
+    public void testContactAddToGroup() throws InterruptedException {
         Contacts before = app.db().contacts();
         ContactData contactToModify = before.iterator().next();
         ContactData contact = new ContactData()
@@ -51,41 +51,64 @@ public class ContactAddToGroup extends TestBase{
                 .withFirstEmail(contactToModify.getFirstEmail());
 
         WebElement contactInfo = app.contact().infoFromInfoForm(contact);
+        String info = contactInfo.getText();
         GroupData group;
 
-
-        if(!contactInfo.getText().contains("Member of")){
+        if(!info.contains("Member of")){
             app.goTo().HomePage();
             group = new GroupData().withName(app.contact().findGroupName());
             app.contact().addContactToGroup(contact, group);
             contact = contact.withGroup(group);
-        } else if (contactInfo.getText().contains("Member of")){
+        } else if (info.contains("Member of")){
             app.goTo().HomePage();
-            Groups groupsInContact = app.contact().findAllGroupsForContact(contactInfo);
-//            System.out.println(groupsInContact);
+            Groups groupsInContact = findAllGroupsForContact(info);
+            System.out.println(groupsInContact);
             Groups groupsToAdd = app.contact().findAllGroupsToAdd();
             System.out.println(groupsToAdd);
 
-//            group = findFreeGroup();
-//            if(group == null){
-//                group = new GroupData().withName("test1");
-//                app.group().create(group);
-//            }
-//            addContactToGroup(contact, group);
+            group = findFreeGroup(groupsInContact, groupsToAdd);
+            System.out.println(group);
+            if(group == null){
+                int suffix = app.contact().randomNumber(10000, 99999);
+                group = new GroupData().withName("test " + suffix);
+                app.goTo().GroupPage();
+                app.group().create(group);
+            }
+            Thread.sleep(500); //without it page loads too fast, with no added group >> exception
+            app.goTo().HomePage();
+            app.contact().addContactToGroup(contact, group);
         }
-/*
+
 
         Contacts after = app.db().contacts();
 
         System.out.println("from java");
         System.out.println(contact);
         System.out.println("from db");
-        System.out.println(contacts);
+        System.out.println(after);
 
         assertThat(after, is(before.without(contactToModify).withAdded(contact)));
-*/
+
 
     }
+
+    private GroupData findFreeGroup(Groups groupsInContact, Groups groupsToAdd) {
+        if(groupsInContact.equals(groupsToAdd)){return null;}
+        GroupData groupToAdd = new GroupData();
+        return groupToAdd;
+    }
+
+    public Groups findAllGroupsForContact(String info) {
+        int splitPoint = info.lastIndexOf("Member of: ");
+        String groups = info.substring(splitPoint + 11, info.length());
+        Groups contactGroups = new Groups();
+        StringTokenizer st = new StringTokenizer(groups, ",");
+        while(st.hasMoreTokens()){
+            contactGroups.add(new GroupData().withName(st.nextToken().replaceAll("^\\s+", "").replaceAll("\\s+$", "")));
+        }
+        return contactGroups;
+    }
+
 
 }
 

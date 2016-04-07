@@ -170,12 +170,6 @@ public class ContactHelper extends HelperBase{
         return randomNum;
     }
 
-    public Groups findAllGroupsForContact(WebElement contactInfo) {
-        System.out.println(contactInfo);
-        Groups contactGroups = new Groups();
-        return contactGroups;
-    }
-
     public Groups findAllGroupsToAdd() {
         WebElement groupsBox = wd.findElement(By.cssSelector(".right>select"));
         List<WebElement> webGroups = groupsBox.findElements(By.tagName("option"));
