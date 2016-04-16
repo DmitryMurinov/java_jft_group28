@@ -79,22 +79,18 @@ public class ContactAddToGroup extends TestBase{
             app.contact().addContactToGroup(contact, group);
         }
 
-
         Contacts after = app.db().contacts();
 
-        System.out.println("from java");
-        System.out.println(contact);
-        System.out.println("from db");
-        System.out.println(after);
-
         assertThat(after, is(before.without(contactToModify).withAdded(contact)));
-
-
     }
 
     private GroupData findFreeGroup(Groups groupsInContact, Groups groupsToAdd) {
         if(groupsInContact.equals(groupsToAdd)){return null;}
         GroupData groupToAdd = new GroupData();
+        for(GroupData group: groupsToAdd){
+            if(!groupsInContact.contains(group)){return group;}
+        }
+        System.out.println("Something wrong with findFreeGroup method!");
         return groupToAdd;
     }
 
