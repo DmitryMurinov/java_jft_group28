@@ -136,6 +136,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withoutGroup(GroupData group) {
+        groups.remove(group);
+        return this;
+    }
+
     public ContactData withPhoto(File photo) {
         this.photo = photo.getPath();
         return this;

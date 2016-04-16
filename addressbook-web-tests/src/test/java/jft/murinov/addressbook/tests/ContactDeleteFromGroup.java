@@ -13,11 +13,10 @@ import java.util.StringTokenizer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-
 /**
- * Created by Dima on 05.04.2016.
+ * Created by Dima on 16.04.2016.
  */
-public class ContactAddToGroup extends TestBase{
+public class ContactDeleteFromGroup extends TestBase{
 
     @BeforeMethod
     public void insurePreconditions(){
@@ -36,7 +35,7 @@ public class ContactAddToGroup extends TestBase{
     }
 
     @Test(enabled = true)
-    public void testContactAddToGroup() throws InterruptedException {
+    public void testContactDeleteFromGroup() throws InterruptedException {
         Contacts before = app.db().contacts();
         ContactData contactToModify = before.iterator().next();
         ContactData contact = new ContactData()
@@ -48,41 +47,34 @@ public class ContactAddToGroup extends TestBase{
         WebElement contactInfo = app.contact().infoFromInfoForm(contact);
         String info = contactInfo.getText();
         GroupData group;
+        Contacts after;
 
         if(!info.contains("Member of")){
             app.goTo().HomePage();
             group = new GroupData().withName(app.contact().findGroupName());
             app.contact().addContactToGroup(contact, group);
             contact = contact.withGroup(group);
+            after = app.db().contacts();
+            assertThat(after, is(before.without(contactToModify).withAdded(contact)));
+            contact = contact.withoutGroup(group);
+            app.goTo().HomePage();
+            app.contact().deleteContactFromGroup(contact, group);
+            Thread.sleep(500); //without it page loads too fast
+            app.goTo().HomePage();
+
         } else if (info.contains("Member of")){
             app.goTo().HomePage();
             Groups groupsInContact = findAllGroupsForContact(info);
-            Groups groupsToAdd = app.contact().findAllGroupsToAdd();
-
-            group = findFreeGroup(groupsInContact, groupsToAdd);
-            if(group == null){
-                int suffix = app.contact().randomNumber(10000, 99999);
-                group = new GroupData().withName("test " + suffix);
-                app.goTo().GroupPage();
-                app.group().create(group);
-            }
-            Thread.sleep(500); //without it page loads too fast, with no added group >> exception
+            group = groupsInContact.iterator().next();
+            contact = contact.withoutGroup(group);
+            app.contact().deleteContactFromGroup(contact, group);
+            Thread.sleep(500); //without it page loads too fast
             app.goTo().HomePage();
-            app.contact().addContactToGroup(contact, group);
         }
 
-        Contacts after = app.db().contacts();
+        after = app.db().contacts();
 
         assertThat(after, is(before.without(contactToModify).withAdded(contact)));
-    }
-
-    private GroupData findFreeGroup(Groups groupsInContact, Groups groupsToAdd) {
-        if(groupsInContact.equals(groupsToAdd)){return null;}
-        GroupData groupToAdd = new GroupData();
-        for(GroupData group: groupsToAdd){
-            if(!groupsInContact.contains(group)){return group;}
-        }
-        return groupToAdd;
     }
 
     public Groups findAllGroupsForContact(String info) {
@@ -98,5 +90,3 @@ public class ContactAddToGroup extends TestBase{
 
 
 }
-
-
