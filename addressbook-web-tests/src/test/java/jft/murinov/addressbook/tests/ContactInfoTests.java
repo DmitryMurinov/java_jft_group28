@@ -34,8 +34,7 @@ public class ContactInfoTests extends TestBase{
                             .withTitle("Software Engineer").withCompany("Google").withFirstAddress("Address string")
                             .withHomePhone("+74951234567").withMobilePhone("+75551234567").withWorkPhone("22-55").withFax("12345-888")
                             .withFirstEmail("nickname@mailserver.ru").withSecondEmail("nickname2@mailserver.ru").withThirdEmail("nickname2@mailserver.ru")
-                            .withHomepage("www.google.com").withGroup(groups.iterator().next()).withAddress2("Miami beach road 88").withPhone2("USA-MIAMI-DIMA").withNotes("It's good to have a dream")
-                    , true);
+                            .withHomepage("www.google.com").withGroup(groups.iterator().next()).withAddress2("Miami beach road 88").withPhone2("USA-MIAMI-DIMA").withNotes("It's good to have a dream"));
         }
     }
 

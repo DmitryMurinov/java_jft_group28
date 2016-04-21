@@ -116,9 +116,9 @@ public class ContactHelper extends HelperBase{
     public void submitContactModify() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
-    public void create(ContactData contactData, boolean isCreation) {
+    public void create(ContactData contactData) {
         clickAddNewContact();
-        fillContactForm(contactData, isCreation);
+        fillContactForm(contactData, contactData.getIsCreation());
         submitContactForm();
         contactCache = null;
         waitForAutoRedirectToContactsList();

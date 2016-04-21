@@ -30,8 +30,7 @@ public class ContactAddToGroup extends TestBase{
         if (app.db().contacts().size() == 0){
             app.contact().create(new ContactData()
                             .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
-                            .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup(groups.iterator().next())
-                    , true);
+                            .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup(groups.iterator().next()));
         }
     }
 

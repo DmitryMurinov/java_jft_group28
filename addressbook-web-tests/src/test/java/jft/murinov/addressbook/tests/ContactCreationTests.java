@@ -111,7 +111,7 @@ public class ContactCreationTests extends TestBase{
         Groups groups = app.db().groups();
         app.contact().openStartPage();
         Contacts before = app.db().contacts();
-        app.contact().create(contact, true);
+        app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(
@@ -126,7 +126,7 @@ public class ContactCreationTests extends TestBase{
                 .withFirstName("FirstName2'").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
                 .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup(groups.iterator().next());
         Contacts before = app.db().contacts();
-        app.contact().create(contact, true);
+        app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(before));
