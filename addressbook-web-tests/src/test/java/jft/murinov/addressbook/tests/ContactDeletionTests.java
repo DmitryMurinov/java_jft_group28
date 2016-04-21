@@ -14,13 +14,13 @@ public class ContactDeletionTests extends TestBase{
 
     @BeforeMethod
     public void insurePreconditions(){
-        app.goTo().GroupPage();
         if (app.db().groups().size() == 0){
+            app.goTo().GroupPage();
             app.group().create(new GroupData().withName("test1"));
         }
         Groups groups = app.db().groups();
-        app.goTo().HomePage();
         if (app.db().contacts().size() == 0){
+            app.goTo().HomePage();
             app.contact().create(new ContactData()
                     .withFirstName("FirstName2").withMiddleName("MiddleName").withLastName("LastName").withNickname("Nickname").withFirstAddress("Address string")
                     .withHomePhone("+74951234567").withMobilePhone("+75551234567").withFirstEmail("nickname@mailserver.ru").withGroup(groups.iterator().next())

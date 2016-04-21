@@ -21,8 +21,8 @@ public class GroupModifyTests extends TestBase{
 
     @BeforeMethod
     public void insurePrecondition(){
-        app.goTo().GroupPage();
         if (app.db().groups().size() == 0){
+            app.goTo().GroupPage();
             app.group().create(new GroupData().withName("test1"));
         }
     }
