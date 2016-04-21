@@ -24,4 +24,11 @@ public class RegistrationHelper extends HelperBase{
         typeInfoBox(By.name("password_confirm"), password);
         click(By.cssSelector("input[value='Update User']"));
     }
+
+    public void login(String username, String password){
+        wd.get(app.getProperty("web.baseURL") + "/login_page.php");
+        typeInfoBox(By.name("username"), username);
+        typeInfoBox(By.name("password"), password);
+        click(By.cssSelector("input[value='Login']"));
+    }
 }

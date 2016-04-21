@@ -131,6 +131,14 @@ public class ContactData {
                 '}';
     }
 
+    @Expose
+    private boolean isCreation = true;
+
+    public ContactData withIsCreation(boolean isCreation) {
+        this.isCreation = isCreation;
+        return this;
+    }
+
     public ContactData withGroup(GroupData group) {
         groups.add(group);
         return this;
@@ -346,6 +354,10 @@ public class ContactData {
 
     public String getWorkPhoneString() {
         return workPhoneString;
+    }
+
+    public boolean getIsCreation() {
+        return isCreation;
     }
 
     public File getPhoto() {
