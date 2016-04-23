@@ -115,8 +115,8 @@ public class JamesHelper {
 
     public void deleteUser(String name, String password){
         initTelnetSession();
-        write("adduser" + name + " " + password);
-        String result = readUntil("User " + name + " added");
+        write("deluser" + name + " " + password);
+        String result = readUntil("User " + name + " deleted");
         closeTelnetSession();
     }
 
