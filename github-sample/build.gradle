@@ -8,3 +8,7 @@ dependencies{
     compile 'org.testng:testng:6.9.10'
     compile 'com.jcabi:jcabi-github:0.27'
 }
+
+test {
+    useTestNG()
+}
