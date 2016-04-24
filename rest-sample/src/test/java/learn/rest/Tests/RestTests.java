@@ -1,16 +1,16 @@
-package learn.rest;
+package learn.rest.Tests;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import learn.rest.Model.Issue;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by Dima on 24.04.2016.
  */
-public class RestTests {
+public class RestTests extends TestBase{
 
     @Test
     public void testCreateIssue() throws IOException {
