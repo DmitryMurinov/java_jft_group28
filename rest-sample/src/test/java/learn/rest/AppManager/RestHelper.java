@@ -22,14 +22,14 @@ public class RestHelper {
     }
 
     public Set<Issue> getIssuesAssured() throws IOException {
-        String json = RestAssured.get("http://demo.bugify.com/api/issues.json").asString();
+        String json = RestAssured.get(app.getProperty("rest.address") + "/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
     }
 
     public Issue getIssueAssured(int issueId) throws IOException {
-        String json = RestAssured.get(String.format("http://demo.bugify.com/api/issues/%s.json", issueId)).asString();
+        String json = RestAssured.get(String.format(app.getProperty("rest.address") + "/issues/%s.json", issueId)).asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         Set<Issue> issuesGson = new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());

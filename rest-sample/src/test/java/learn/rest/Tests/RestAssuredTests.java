@@ -19,7 +19,7 @@ public class RestAssuredTests extends TestBase{
 
     @BeforeClass
     public void init(){
-        RestAssured.authentication = RestAssured.basic("LSGjeU4yP1X493ud1hNniA==", "");
+        RestAssured.authentication = RestAssured.basic(app.getProperty("rest.key"), "");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class RestAssuredTests extends TestBase{
 
     @Test
     public void testCreateIssueSkip() throws IOException {
-        skipIfNotFixed(12);
+        skipIfNotFixed(7);
         Set<Issue> oldIssues = app.rest().getIssuesAssured();
         long time = System.currentTimeMillis();
         Issue newIssue = new Issue().withSubject("Subject Murinov " + time).withDescription("Descrition Murinov " + time);

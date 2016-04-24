@@ -40,7 +40,7 @@ public class RestTests extends TestBase{
     }
 
     private Executor getExecutor() {
-        return Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==", "");
+        return Executor.newInstance().auth(app.getProperty("rest.key"), "");
     }
 
     private int createIssue(Issue newIssue) throws IOException {
