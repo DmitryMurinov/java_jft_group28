@@ -27,7 +27,7 @@ public class PointTests {
       Assert.assertEquals(p1.distance(p2), 0.0);
    }
 
-   @Test
+   @Test(enabled = false)
    public void distanceTestInt(){
 
       PointWithMath p1 = new PointWithMath(10, 10);
@@ -36,7 +36,7 @@ public class PointTests {
       Assert.assertEquals(p1.distance(p2), 0);
    }
 
-   @Test
+   @Test(enabled = false)
    public void distanceTestLetter(){
 
       PointWithMath p1 = new PointWithMath(10, 10);
