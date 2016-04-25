@@ -118,7 +118,7 @@ public class ContactHelper extends HelperBase{
 
     public void create(ContactData contactData) {
         clickAddNewContact();
-        fillContactForm(contactData, contactData.getIsCreation());
+        fillContactForm(contactData, true);
         submitContactForm();
         contactCache = null;
         waitForAutoRedirectToContactsList();
