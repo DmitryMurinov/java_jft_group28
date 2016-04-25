@@ -3,7 +3,13 @@
 <suite name="Suite1" verbose="1" >
     <test name="Contacts">
         <classes>
+            <class name="jft.murinov.addressbook.tests.ContactAddToGroup" />
             <class name="jft.murinov.addressbook.tests.ContactCreationTests" />
+            <class name="jft.murinov.addressbook.tests.ContactDeleteFromGroup" />
+            <class name="jft.murinov.addressbook.tests.ContactDeletionTests" />
+            <class name="jft.murinov.addressbook.tests.ContactInfoTests" />
+            <class name="jft.murinov.addressbook.tests.ContactModifyTests" />
+            <class name="jft.murinov.addressbook.tests.ContactPhoneTests" />
         </classes>
     </test>
 </suite>

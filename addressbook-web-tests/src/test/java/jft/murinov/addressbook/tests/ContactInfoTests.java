@@ -41,17 +41,11 @@ public class ContactInfoTests extends TestBase{
     @Test(enabled = true)
     public void testContactPhones(){
         app.goTo().HomePage();
-
         ContactData contact = app.db().contacts().iterator().next();
-
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
         WebElement contactInfo = app.contact().infoFromInfoForm(contact);
-
         String contactI = cleaned(contactInfo);
-
         String contactFromEdit = mergeContactInfo(contactInfoFromEditForm);
-
         assertThat(contactI, equalTo(contactFromEdit));
     }
 
