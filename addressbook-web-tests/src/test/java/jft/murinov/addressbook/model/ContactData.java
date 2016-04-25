@@ -356,10 +356,6 @@ public class ContactData {
         return workPhoneString;
     }
 
-//    public boolean getIsCreation() {
-//        return isCreation;
-//    }
-
     public File getPhoto() {
         if(photo != null) {
             return new File(photo);
