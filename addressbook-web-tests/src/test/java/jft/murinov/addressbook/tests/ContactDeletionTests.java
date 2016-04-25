@@ -33,6 +33,11 @@ public class ContactDeletionTests extends TestBase{
         Contacts before = app.db().contacts();
         ContactData contactToDelete = before.iterator().next();
         app.goTo().HomePage();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         app.contact().delete(contactToDelete);
         assertThat(app.contact().count(), equalTo(before.size() - 1));
         Contacts after = app.db().contacts();

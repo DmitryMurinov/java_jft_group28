@@ -36,6 +36,13 @@ public class ContactModifyTests extends TestBase {
                 .withId(contactToModify.getId()).withFirstName("FirstNameModified").withMiddleName("MiddleNameModified").withLastName("LastNameModified")
                 .withNickname("NicknameModified").withFirstAddress("Address stringModified").withHomePhone("+74957654321").withMobilePhone("+75557654321")
                 .withFirstEmail("nicknameModified@mailserver.ru");
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         app.contact().modify(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contacts();
