@@ -34,7 +34,7 @@ public class ContactDeletionTests extends TestBase{
         ContactData contactToDelete = before.iterator().next();
         app.goTo().HomePage();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
