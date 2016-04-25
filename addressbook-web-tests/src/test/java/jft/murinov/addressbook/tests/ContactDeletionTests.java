@@ -29,7 +29,7 @@ public class ContactDeletionTests extends TestBase{
 
     @Test(enabled = true)
     public void testContactDeletion() {
-        app.contact().openStartPage();
+        app.goTo().HomePage();
         Contacts before = app.db().contacts();
         ContactData contactToDelete = before.iterator().next();
         app.goTo().HomePage();
