@@ -4,7 +4,6 @@ import jft.murinov.addressbook.model.ContactData;
 import jft.murinov.addressbook.model.Contacts;
 import jft.murinov.addressbook.model.GroupData;
 import jft.murinov.addressbook.model.Groups;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -44,13 +43,6 @@ public class ContactModifyTests extends TestBase {
         verifyContactListInUI();
     }
 
-    @AfterMethod
-    public void waitALittle(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

@@ -5,7 +5,6 @@ import jft.murinov.addressbook.model.Contacts;
 import jft.murinov.addressbook.model.GroupData;
 import jft.murinov.addressbook.model.Groups;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -96,14 +95,6 @@ public class ContactAddToGroup extends TestBase{
         return contactGroups;
     }
 
-    @AfterMethod
-    public void waitALittle(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
 
