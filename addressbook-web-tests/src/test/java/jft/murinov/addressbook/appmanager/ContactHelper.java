@@ -196,18 +196,32 @@ public class ContactHelper extends HelperBase{
     }
 
     public void deleteContactFromGroup(ContactData contact, GroupData group) throws InterruptedException {
-        selectGroupToDeleteContact(group.getName());
+        selectGroupFilter(group.getName());
         selectContactById(contact.getId());
         clickOnRemoveFrom();
     }
+
+
 
     private void clickOnRemoveFrom() {
         click(By.xpath(".//*[@id='content']/form[2]/div[3]/input"));
     }
 
-    private void selectGroupToDeleteContact(String name) throws InterruptedException {
+
+    public void resetGroupFilter() throws InterruptedException {
+        if(!getGroupFilter().equals("[all]")){
+            selectGroupFilter("[all]");
+        }
+    }
+
+    private String getGroupFilter(){
+      return  new Select(wd.findElement(By.xpath(".//*[@id='right']/select"))).getFirstSelectedOption().getText();
+    }
+
+    public void selectGroupFilter(String name) throws InterruptedException {
         new Select(wd.findElement(By.xpath(".//*[@id='right']/select"))).selectByVisibleText(name);
     }
+
 
     public ContactData infoFromEditForm(ContactData contact) {
         clickModifyContactById(contact.getId());
@@ -235,4 +249,6 @@ public class ContactHelper extends HelperBase{
         WebElement element = wd.findElement(By.xpath(".//*[@id='content']"));
         return element;
     }
+
+
 }

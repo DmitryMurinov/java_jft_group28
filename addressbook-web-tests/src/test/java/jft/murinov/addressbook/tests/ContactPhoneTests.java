@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.*;
 public class ContactPhoneTests extends TestBase{
 
     @BeforeMethod
-    public void insurePreconditions(){
+    public void insurePreconditions() throws InterruptedException {
         app.goTo().GroupPage();
         if (app.db().groups().size() == 0){
             app.group().create(new GroupData().withName("test1"));
