@@ -24,10 +24,6 @@ public class MyFirstProgram {
 
         System.out.println("Расстояние между точкой с координатами " + pMath.x1 + ", " + pMath.y1 + " и " + pMath.x2 + ", " + pMath.y2 + " равно " + pMath.distance());
 
-        //Реализация варианта, который утром 24.02.2016 обсуждали в Скайпе (p2.distance(p1)
-
-        //Инициализируем объекты для 2 точек
-
         PointWithMath pm1 = new PointWithMath(20, 20);
         PointWithMath pm2 = new PointWithMath(30, 30);
 
