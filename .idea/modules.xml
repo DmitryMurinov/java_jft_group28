@@ -17,6 +17,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/rest-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/rest-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/rest-sample_main.iml" filepath="$PROJECT_DIR$/.idea/modules/rest-sample_main.iml" group="rest-sample" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/rest-sample_test.iml" filepath="$PROJECT_DIR$/.idea/modules/rest-sample_test.iml" group="rest-sample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets.iml" filepath="$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets_main.iml" filepath="$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets_main.iml" group="selenium-2.0-secrets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets_test.iml" filepath="$PROJECT_DIR$/.idea/modules/selenium-2.0-secrets_test.iml" group="selenium-2.0-secrets" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" group="soap-sample" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" group="soap-sample" />
