@@ -1,19 +1,15 @@
 package Homeworks.Homework4;
 
+import Workbench.WebElementWait;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
-import com.google.common.base.Predicate;
-
-import static Homeworks.Homework4.Predicates.fixed;
+import static Workbench.Predicates.fixed;
 
 /**
  * Created by Dima on 12.09.2016.
