@@ -19,7 +19,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by Dehar on 23.09.2016.
+ * Created by Dmitry Murinov on 23.09.2016.
+ *
+ * GITHUB LINK TO WHOLE PROJECT WITH THIS ITEM:
+ *
+ * https://github.com/DmitryMurinov/java_jft_group28/tree/master/selenium-2.0-secrets/src/test/java/Homeworks/Homework5
  */
 public class MovieSearch {
 
